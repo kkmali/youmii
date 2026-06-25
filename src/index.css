@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* colors */
+  --body-bg: #ffffff;
+  --body-text: #16100d;
+  --secondary: #817874;
+  --header-bg: #ffffff;
+  --header-text: #16100d;
+  --header-text-hover: #ed5f18;
+  --footer-bg: #ffffff;
+  --footer-text: #16100d;
+  --primary: #ed5f18;
+  --grey-border: #ededed;
+  --card-bg: #f8f7f2;
+  --grey-muted: #817874;
+  --yellow-400: #ffa800;
+  --red-400: #ff3b30;
+  --brand-primary-subtle: #fcf3ed;
+  --brand-border: rgba(237, 95, 24, 0.2);
+
+  /* gradients */
+  --primary-gr: linear-gradient(to right, #ff934f, #ce4714);
+  --badge-gr: linear-gradient(to right, #ED5F18 0%, #FFFFFF 56%);
+  --cta-gr: linear-gradient(166.1deg, #f6ad79 2.44%, #fdeee2 53.34%, #f6ad79 88.28%);
+  --footer-gr: linear-gradient(to right, #F8BDA0 0%, #EDEDED 36%, #EDEDED 100%);
+}
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* colors */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-grey-border: var(--grey-border);
+  --color-card-bg: var(--card-bg);
+  --color-body-bg: var(--body-bg);
+  --color-body-text: var(--body-text);
+  --color-header-bg: var(--header-bg);
+  --color-header-text: var(--header-text);
+  --color-header-text-hover: var(--header-text-hover);
+  --color-footer-bg: var(--footer-bg);
+  --color-footer-text: var(--footer-text);
+  --color-yellow-400: var(--yellow-400);
+  --color-red-400: var(--red-400);
+  --color-brand-subtle: var(--brand-primary-subtle);
+  --color-brand-border: var(--brand-border);
+
+  /* gradients */
+  --color-primary-gr: var(--primary-gr);
+  --color-badge-gr: var(--badge-gr);
+  --color-cta-gr: var(--cta-gr);
+  --color-footer-gr: var(--cta-gr);
+
+  /* shadows */
+  --shadow-100: 0px 4px 20px 0px rgba(237, 95, 24, 0.1);
+  --shadow-10: 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-60: 0px 4px 4px 0px rgba(152, 152, 152, 0.15);
+  --shadow-nav: 0px 1px 16px 0px rgba(0, 0, 0, 0.06);
+  --shadow-foot: -3px 0px 20px 0px rgba(237, 95, 24, 0.15);
+
+  /* animation */
+  --animate-fadeIn: fadeIn 0.4s ease-out forwards;
+  --animate-scroll: scroll 20s linear infinite;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--body-bg);
+    color: var(--body-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
+
+@utility container {
+    @apply mx-auto px-4 max-w-400;
+}
