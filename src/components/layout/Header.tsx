@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Button } from '../ui/Button'
 import chevronDown from '../../assets/icons/chevron-down.svg'
 
@@ -8,36 +8,115 @@ const navLinks = [
   { label: 'Contact us', href: '#contact' },
 ]
 
+const languages = [
+  { code: 'EN', label: 'English' },
+  { code: 'DE', label: 'Deutsch' },
+  { code: 'FR', label: 'Français' },
+  { code: 'IT', label: 'Italiano' },
+]
+
 function LanguageSwitcher() {
+  const [open, setOpen] = useState(false)
+  const [selected, setSelected] = useState('EN')
+  const ref = useRef<HTMLDivElement>(null)
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  // Close on Escape
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [])
+
   return (
-    <button
-      className="flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-card-bg focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 transition-colors text-sm font-medium text-body-text"
-      aria-label="Switch language"
-    >
-      <span>EN</span>
-      <img alt="" src={chevronDown} className="size-3.5 block" />
-    </button>
+    <div ref={ref} className="relative">
+      <button
+        className="flex items-center gap-1.5 px-3 py-2 rounded-lg cursor-pointer hover:bg-card-bg hover:text-primary focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 transition-colors text-sm font-medium text-body-text"
+        aria-label="Switch language"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen(!open)}
+      >
+        <span>{selected}</span>
+        <img
+          alt=""
+          src={chevronDown}
+          className={`size-3.5 block transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        />
+      </button>
+
+      {/* Dropdown */}
+      {open && (
+        <div
+          role="listbox"
+          aria-label="Language options"
+          className="absolute right-0 top-full mt-1.5 w-36 bg-white border border-grey-border rounded-xl shadow-100 overflow-hidden z-50"
+        >
+          {languages.map((lang) => (
+            <button
+              key={lang.code}
+              role="option"
+              aria-selected={selected === lang.code}
+              className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-left cursor-pointer transition-colors hover:bg-card-bg active:bg-grey-border focus-visible:outline-2 focus-visible:outline-primary ${
+                selected === lang.code ? 'text-primary bg-card-bg' : 'text-body-text hover:text-primary'
+              }`}
+              onClick={() => {
+                setSelected(lang.code)
+                setOpen(false)
+              }}
+            >
+              <span className="flex-1">{lang.label}</span>
+              {selected === lang.code && (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path
+                    d="M2.5 7L5.5 10L11.5 4"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 
 /**
  * Animated hamburger ↔ X built entirely with Tailwind classes.
- * Three spans rotate/translate using conditional class strings — no inline style.
  */
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
     <span className="flex flex-col justify-center items-center size-5 relative" aria-hidden="true">
       <span
-        className={`absolute block h-0.5 w-5 bg-body-text rounded-full transition-all duration-300 origin-center ${open ? 'translate-y-0 rotate-45' : '-translate-y-1.5'
-          }`}
+        className={`absolute block h-0.5 w-5 bg-body-text rounded-full transition-all duration-300 origin-center ${
+          open ? 'translate-y-0 rotate-45' : '-translate-y-1.5'
+        }`}
       />
       <span
-        className={`absolute block h-0.5 w-5 bg-body-text rounded-full transition-all duration-300 ${open ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'
-          }`}
+        className={`absolute block h-0.5 w-5 bg-body-text rounded-full transition-all duration-300 ${
+          open ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'
+        }`}
       />
       <span
-        className={`absolute block h-0.5 w-5 bg-body-text rounded-full transition-all duration-300 origin-center ${open ? 'translate-y-0 -rotate-45' : 'translate-y-1.5'
-          }`}
+        className={`absolute block h-0.5 w-5 bg-body-text rounded-full transition-all duration-300 origin-center ${
+          open ? 'translate-y-0 -rotate-45' : 'translate-y-1.5'
+        }`}
       />
     </span>
   )
@@ -68,7 +147,7 @@ export function Header() {
       {/* Top bar */}
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 h-12 md:h-14 flex items-center justify-between gap-4">
 
-        {/* <YoumiiLogo /> */}
+        {/* Logo */}
         <a href="/" className="flex shrink-0 h-8 md:h-10">
           <img alt="" src="/youmii-logo.png" />
         </a>
@@ -110,15 +189,44 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile drawer — CSS max-height transition for smooth slide */}
-      <div
-        id="mobile-menu"
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+      {/* Mobile right-side drawer */}
+      <div className="md:hidden">
+        {/* Backdrop */}
+        <div
+          className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${
+            mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
-        aria-hidden={!mobileOpen}
-      >
-        <div className="border-t border-grey-border bg-white px-4 sm:px-6 pt-4 pb-6 flex flex-col">
-          <nav className="flex flex-col" aria-label="Mobile navigation">
+          aria-hidden="true"
+          onClick={() => setMobileOpen(false)}
+        />
+
+        {/* Drawer panel — slides in from the right */}
+        <div
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          aria-hidden={!mobileOpen}
+          className={`fixed top-0 right-0 h-full w-[280px] bg-white z-50 flex flex-col shadow-foot transition-transform duration-300 ease-in-out ${
+            mobileOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          {/* Drawer header */}
+          <div className="flex items-center justify-between px-5 py-4 border-b border-grey-border">
+            <a href="/" className="flex shrink-0 h-7" onClick={() => setMobileOpen(false)}>
+              <img alt="Youmii" src="/youmii-logo.png" />
+            </a>
+            <button
+              className="p-2 rounded-lg hover:bg-card-bg focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 transition-colors"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close menu"
+            >
+              <HamburgerIcon open={true} />
+            </button>
+          </div>
+
+          {/* Nav links */}
+          <nav className="flex flex-col flex-1 px-5 pt-4" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -130,7 +238,9 @@ export function Header() {
               </a>
             ))}
           </nav>
-          <div className="mt-5">
+
+          {/* CTA */}
+          <div className="px-5 pb-8">
             <Button variant="primary" className="w-full justify-center">
               Download App
             </Button>

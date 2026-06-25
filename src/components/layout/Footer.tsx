@@ -85,7 +85,7 @@ export function Footer({ showCta = true }: FooterProps) {
                   {/* Brand block */}
                   <div className="flex flex-col gap-2.5">
                     <a href="/" className="flex shrink-0 h-8 md:h-10">
-                      <img alt="" src="/youmii-logo.png" />
+                       <img alt="" src="/youmii-logo.png" />
                     </a>
                     <p className="text-sm text-secondary leading-snug">
                       AI-powered restaurant discovery<br />for Switzerland

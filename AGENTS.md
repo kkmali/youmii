@@ -69,10 +69,12 @@ npm run preview
 ## 0.2 Core Rules
 
 - Use **Tailwind CSS v4 utility classes** for all styling. No custom CSS in component files.
-- Use **CSS variable shorthand syntax** in Tailwind classes: `text-(--primary)`, `bg-(--card-bg)`. Do not use the verbose `bg-[var(--primary)]` form — the linter flags it.
+- Use **theme utility classes** for all semantic color/border tokens registered in `@theme` (e.g., write **`text-primary`**, **`bg-card-bg`**, **`border-grey-border`**, **`text-body-text`**, **`bg-body-bg`**). Never use the CSS variable shorthand forms (e.g., do **not** use `bg-(--card-bg)`, `text-(--primary)`, or `border-(--grey-border)`) and do **not** use verbose syntax like `bg-[var(--primary)]`.
+- Use **gradient shorthand syntax** in Tailwind: always use the `bg-(image:--token-name)` syntax for theme gradients (e.g., `bg-(image:--primary-gr)`).
 - Use **semantic token names** defined in `src/index.css`. Do not use arbitrary hex values or raw Tailwind palette colors (`text-orange-500`, `bg-slate-100`) in components.
 - Use **named shadow utilities** (`shadow-nav`, `shadow-100`, etc.). Do not write arbitrary shadow values.
-- Do **not** use inline `style={...}` except for CSS custom property gradients that cannot be expressed as a static Tailwind class (e.g., `style={{ background: 'var(--cta-gr)' }}`). This is the only allowed exception.
+- Do **not** use inline `style={...}` except for raw gradient definitions that are not registered in the theme (such as the testimonials stats background gradient). Registered theme gradients must be styled using `bg-(image:...)`.
+- **Prioritize UI Primitives.** Always prioritize using existing UI primitives (e.g., `Button`, `PrimaryGradientButton`, `CtaBanner`, `Badge`) instead of rewriting similar logic or styles from scratch.
 - For conditional class names use **template literal concatenation with a ternary** or extract to a `const`. Keep it readable. The project does not use `clsx`/`cn` — do not add it without discussion.
 - Use **`import type { ... }`** for type-only imports.
 - All component props are typed with a named `interface` or `type`. No `any`.
@@ -121,6 +123,7 @@ Never suppress errors with `// @ts-ignore`, `eslint-disable`, or by deleting che
 
 - **Reusable.** Every component takes props and exposes sensible defaults.
 - **Overridable.** Accept a `className` prop and concatenate with existing classes so consumer classes can win.
+- **Strict Reuse of UI Primitives.** Do not rewrite styling or logic that belongs to or is already implemented by core UI primitives (e.g., `Button`, `PrimaryGradientButton`, `CtaBanner`, `Badge`). Extend or use them directly.
 - **No prop drilling more than 2 levels.** Lift to the layout component or pass via composition.
 - **Accessible by default.** Semantic HTML, correct ARIA roles, focus-visible states, keyboard navigation, WCAG AA contrast minimum.
 - **Polymorphic where appropriate.** `Button` renders as `<button>` or `<a>` via the `as` prop — follow this pattern.
@@ -205,14 +208,16 @@ All defined in `src/index.css :root`:
 
 ### 4.3 Gradient Tokens
 
+Only gradients registered under `@theme` in `src/index.css` are listed here:
+
 | Token | Value | Usage |
 |---|---|---|
 | `--primary-gr` | `linear-gradient(to right, #ff934f, #ce4714)` | CTA buttons ("Download App") |
 | `--cta-gr` | `linear-gradient(166.1deg, #f6ad79 2.44%, #fdeee2 53.34%, #f6ad79 88.28%)` | CTA banner background |
-| `--badge-gr` | `linear-gradient(to right, #ffede0, #ffffff)` | Badge pill background |
-| `--featured-tag-gr` | `linear-gradient(97.33deg, #930b7d 11.38%, #c9593e 67.73%, #ffa800 98.39%)` | Featured tags |
+| `--badge-gr` | `linear-gradient(to right, #ED5F18 0%, #FFFFFF 56%)` | Badge pill background |
+| `--footer-gr` | `linear-gradient(to right, #F8BDA0 0%, #EDEDED 36%, #EDEDED 100%)` | Footer border/gradient (Note: theme maps `--color-footer-gr` to `var(--cta-gr)`) |
 
-Gradients cannot be expressed as static Tailwind classes. They are the **only** case where `style={{ background: 'var(--token)' }}` is permitted.
+All theme gradients must be expressed using the Tailwind v4 gradient shorthand syntax `bg-(image:--token-name)`. Inline `style={{ background: 'var(--token)' }}` is **not** permitted for registered gradients.
 
 ### 4.4 Shadow Tokens
 
@@ -397,20 +402,22 @@ Footer link data is defined as a `const` inside the file. When it needs to be sh
 ### Always
 
 - Use Tailwind utility classes for all layout, spacing, color, and typography.
-- Use CSS variable shorthand in Tailwind: `text-(--primary)`, `bg-(--card-bg)`, `border-(--grey-border)`.
+- Use standard theme utility classes for semantic colors: write **`text-primary`**, **`bg-card-bg`**, **`border-grey-border`**, **`text-body-text`**, **`bg-body-bg`**, etc.
+- Use Tailwind v4 gradient syntax for theme gradients: `bg-(image:--token-name)` (e.g., `bg-(image:--primary-gr)`).
 - Use named shadow utilities: `shadow-nav`, `shadow-100`, etc.
 - Use `rounded-full` for pill shapes, `rounded-2xl` or `rounded-[30px]` for banners.
 - Use `transition-colors` or `transition-opacity` for interactive state changes.
-- Pair `focus-visible:outline-2 focus-visible:outline-(--primary)` (or `focus-visible:ring-2`) on all focusable elements.
+- Pair `focus-visible:outline-2 focus-visible:outline-primary` (or `focus-visible:ring-2`) on all focusable elements.
+- Prioritize using existing UI primitives (`Button`, `PrimaryGradientButton`, `CtaBanner`, `Badge`) rather than writing similar styles/elements from scratch.
 
 ### Never
 
 - ❌ Raw hex or OKLCH values in components (`text-[#ed5f18]`, `bg-[oklch(…)]`)
 - ❌ Arbitrary Tailwind palette colors (`text-orange-500`, `bg-slate-100`)
 - ❌ Arbitrary shadow values (`shadow-[0px_4px_8px_...]`)
-- ❌ CSS variable verbose syntax in classes (`bg-[var(--primary)]`) — use `bg-(--primary)` instead
+- ❌ CSS variable shorthand forms in Tailwind classes (e.g., do **not** write `bg-(--primary)`, `text-(--body-text)`, or `border-(--grey-border)`) — always write standard theme utility classes (e.g., `bg-primary`, `text-body-text`, `border-grey-border`), and do not use the verbose form like `bg-[var(--primary)]`.
 - ❌ Custom `<style>` blocks in component files
-- ❌ Inline `style={...}` except for CSS gradient variables (the one documented exception)
+- ❌ Inline `style={...}` for styling or theme gradients — theme gradients must use `bg-(image:--token)`
 - ❌ `https://www.figma.com/api/mcp/asset/...` URLs — always download to `src/assets/` and import
 
 ---

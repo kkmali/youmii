@@ -30,12 +30,12 @@ const mergeClasses = (...classes: (string | undefined | null | false)[]) =>
   classes.filter(Boolean).join(' ')
 
 const baseClasses =
-  'inline-flex items-center justify-center gap-2 rounded-full transition-all duration-300 ease-in-out hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-(--primary) focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60 cursor-pointer select-none'
+  'inline-flex items-center justify-center gap-2 rounded-full transition-all duration-300 ease-in-out hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60 cursor-pointer select-none'
 
 const variantClasses = {
   primary: 'text-white bg-(image:--primary-gr)',
   outline:
-    'text-(--body-text) bg-white border border-(--grey-border) hover:border-(--primary) hover:text-(--primary)',
+    'text-body-text bg-white border border-grey-border hover:border-primary hover:text-primary',
 }
 
 const sizeClasses = {
