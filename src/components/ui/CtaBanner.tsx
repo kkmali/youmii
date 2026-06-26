@@ -1,3 +1,4 @@
+import { Sparkles } from 'lucide-react'
 import { Badge } from './Badge'
 import { Button } from './Button'
 
@@ -26,7 +27,7 @@ export function CtaBanner({
     >
       {/* Badge pill */}
       {badge && (
-        <Badge text={badge} className="mb-4 sm:mb-5" />
+        <Badge text={badge} className="mb-4 sm:mb-5" icon={Sparkles} />
       )}
 
       {/* Headline — fluid: text-2xl → text-3xl → text-4xl */}

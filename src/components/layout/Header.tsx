@@ -143,9 +143,9 @@ export function Header() {
   }, [mobileOpen])
 
   return (
-    <header className="sticky top-5 z-50 w-full bg-header-bg">
+    <header className="sticky top-0 z-50 w-full bg-header-bg">
       {/* Top bar */}
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 h-12 md:h-14 flex items-center justify-between gap-4">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-2 md:py-3 flex items-center justify-between gap-4">
 
         {/* Logo */}
         <a href="/" className="flex shrink-0 h-8 md:h-10">

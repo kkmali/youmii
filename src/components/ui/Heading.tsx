@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Sparkles } from 'lucide-react'
 import { Badge } from './Badge'
 
 export interface HeadingProps {
@@ -33,7 +34,7 @@ export function Heading({
         isCenter ? 'items-center text-center' : 'items-start text-left'
       }${className ? ` ${className}` : ''}`}
     >
-      {badgeText && <Badge text={badgeText} />}
+      {badgeText && <Badge text={badgeText} icon={Sparkles} />}
 
       <h2 className="text-[clamp(24px,4vw,40px)] font-bold">
         {title}

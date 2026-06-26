@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -20,6 +20,7 @@
   --red-400: #ff3b30;
   --brand-primary-subtle: #fcf3ed;
   --brand-border: rgba(237, 95, 24, 0.2);
+  --golden: #E4B67D;
 
   /* gradients */
   --primary-gr: linear-gradient(to right, #ff934f, #ce4714);
@@ -28,10 +29,11 @@
   --footer-gr: linear-gradient(to right, #F8BDA0 0%, #EDEDED 36%, #EDEDED 100%);
   --stats-gr: linear-gradient(161deg, #ffffff 0%, rgba(252,223,203,0.5) 52%, rgba(255,255,255,0.6) 100%);
   --stats-border-gr: linear-gradient(161deg, #FFFFFF 0%, #ED5F1899 45%, #FFFFFF 94%);
+  --how-it-works-gr: linear-gradient(180deg, #ffffff 26%, rgba(246,175,139,0.7) 74%, rgba(237,95,24,0.6) 99%);
 }
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* colors */
   --color-primary: var(--primary);
@@ -50,6 +52,7 @@
   --color-red-400: var(--red-400);
   --color-brand-subtle: var(--brand-primary-subtle);
   --color-brand-border: var(--brand-border);
+  --color-golden: var(--golden);
 
   /* gradients */
   --color-primary-gr: var(--primary-gr);
@@ -58,6 +61,7 @@
   --color-footer-gr: var(--footer-gr);
   --color-stats-gr: var(--stats-gr);
   --color-stats-border-gr: var(--stats-border-gr);
+  --color-how-it-works-gr: var(--how-it-works-gr);
 
   /* shadows */
   --shadow-100: 0px 4px 20px 0px rgba(237, 95, 24, 0.1);
@@ -69,6 +73,11 @@
   /* animation */
   --animate-fadeIn: fadeIn 0.4s ease-out forwards;
   --animate-scroll: scroll 20s linear infinite;
+  --animate-float-1: float 6s ease-in-out infinite;
+  --animate-float-2: float 6s ease-in-out infinite 1.2s;
+  --animate-float-3: float 6s ease-in-out infinite 2.4s;
+  --animate-float-4: float 6s ease-in-out infinite 3.6s;
+  --animate-float-5: float 6s ease-in-out infinite 4.8s;
 
   @keyframes fadeIn {
     from {
@@ -84,6 +93,11 @@
   @keyframes scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
 }
 
@@ -104,7 +118,7 @@
 }
 
 @utility container {
-    @apply mx-auto px-4 max-w-400;
+    @apply mx-auto px-4 max-w-7xl;
 }
 
 @utility section {

@@ -82,6 +82,8 @@ npm run preview
 - **No trailing slashes** on internal links (`/about` not `/about/`).
 - **Responsive first.** Mobile baseline is 360px. Test 360px, 640px, 768px, 1024px, 1440px, 1920px.
 - **No Figma MCP asset URLs** in any component or page. These are workspace-scoped temporary URLs that break in production. Download every image to `src/assets/`, import it (`import img from '@/assets/file.png'`), and reference `img` or `img.src`.
+- **Always use Lucide React icons.** Do not use raw inline SVGs for common icons or customize SVGs inside components. Import icons from `lucide-react` to keep style, line weights, and sizing consistent across all components.
+- **Use standard section padding.** For top/bottom padding of sections, always apply the `section` utility class (defined as `@utility section` in `src/index.css`) on the `<section>` element.
 
 ---
 
