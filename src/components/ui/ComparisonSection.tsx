@@ -1,4 +1,4 @@
-import { AlertCircle, Sparkles, Frown, HeartCrack, AlarmClockOff, Award, BrainCircuit } from 'lucide-react'
+import { AlertCircle, Sparkles, Frown, HeartCrack, AlarmClockOff, Award, BrainCircuit, Rocket } from 'lucide-react'
 import { Heading } from './Heading'
 import { ComparisonItem } from './ComparisonItem'
 
@@ -34,7 +34,7 @@ const SOLUTION_ITEMS = [
     variant: 'solution-orange' as const,
   },
   {
-    icon: Award,
+    icon: Rocket,
     title: 'Discover by Mood',
     description:
       'Tap a mood chip — Romantic, Terrace, Business, Vegan — and see matched restaurants immediately.',
@@ -58,17 +58,17 @@ export interface ComparisonSectionProps {
 export function ComparisonSection({ className = '' }: ComparisonSectionProps) {
   return (
     <section className={`section${className ? ` ${className}` : ''}`}>
-      <div className="container flex flex-col gap-10 lg:gap-14">
+      <div className="container flex flex-col gap-6 md:gap-10 lg:gap-14">
 
         {/* Heading */}
         <Heading
-          badgeText="WHY YOUMII"
+          badgeText="THE CHALLENGE"
           title={
             <>
-              Stop Settling for <span className="text-primary">Good Enough</span>
+              Stop <span className="text-primary">Guessing</span>, Start <span className="text-primary">Discovering</span>
             </>
           }
-          subtitle="Most apps show you everything. Youmii shows you what's right for you."
+          subtitle="No more guesswork. Just great restaurants in Switzerland."
           align="center-align"
         />
 
@@ -76,21 +76,18 @@ export function ComparisonSection({ className = '' }: ComparisonSectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 items-start">
 
           {/* ── Left: The Old Way ─────────────────────────────────── */}
-          <div className="relative rounded-[32px] border border-[#ebebeb] p-6 sm:p-8 md:p-10 flex flex-col gap-6 md:gap-8 opacity-90">
-            {/* Warm grey background */}
-            <div className="absolute inset-0 rounded-[32px] bg-[#f6f3ef]" aria-hidden="true" />
-            <div className="absolute inset-0 rounded-[32px] bg-white/20 mix-blend-saturation" aria-hidden="true" />
+          <div className="rounded-4xl p-4 sm:p-6 lg:p-10 flex flex-col gap-3 sm:gap-6 md:gap-8">
 
             {/* Panel header */}
-            <div className="relative flex items-center gap-4">
-              <div className="shrink-0 size-12 rounded-full bg-[rgba(90,65,56,0.1)] flex items-center justify-center">
-                <Frown className="size-5 text-secondary" />
+            <div className="flex items-center gap-4">
+              <div className="shrink-0 size-10 md:size-12 rounded-full bg-primary/12 flex items-center justify-center">
+                <Frown className="size-4.5 md:size-5 text-secondary" />
               </div>
-              <h3 className="text-2xl font-semibold text-body-text">The Old Way</h3>
+              <h3 className="text-xl sm:text-2xl font-semibold text-body-text">The Old Way</h3>
             </div>
 
             {/* List items */}
-            <div className="relative flex flex-col gap-6">
+            <div className="flex flex-col gap-2 md:gap-6">
               {PROBLEM_ITEMS.map((item) => (
                 <ComparisonItem
                   key={item.title}
@@ -104,32 +101,30 @@ export function ComparisonSection({ className = '' }: ComparisonSectionProps) {
           </div>
 
           {/* ── Right: The Youmii Way ─────────────────────────────── */}
-          <div
-            className="relative rounded-[32px] border-2 border-white shadow-[0px_10px_40px_0px_rgba(0,0,0,0.15)] overflow-hidden p-6 sm:p-8 md:p-10 flex flex-col gap-6 md:gap-8"
-            style={{
-              background:
-                'linear-gradient(131deg, #ffffff 2%, rgba(251,217,193,0.76) 53%, rgba(249,190,151,0.6) 88%)',
-            }}
-          >
-            {/* Panel header */}
-            <div className="flex items-center gap-4">
-              <div className="shrink-0 size-12 rounded-full bg-primary flex items-center justify-center">
-                <Sparkles className="size-5 text-white" />
+          <div className='bg-(image:--stats-border-gr) p-0.5 rounded-4xl'>
+            <div
+              className="relative rounded-4xl shadow-200 overflow-hidden p-4 sm:p-6 lg:p-10 flex flex-col gap-4 sm:gap-6 md:gap-8 bg-(image:--comparison-gr)"
+            >
+              {/* Panel header */}
+              <div className="flex items-center gap-4">
+                <div className="shrink-0 size-10 md:size-12 rounded-full bg-primary flex items-center justify-center">
+                  <Sparkles className="size-4.5 md:size-5 text-white" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-semibold text-body-text">The Youmii Way</h3>
               </div>
-              <h3 className="text-2xl font-semibold text-body-text">The Youmii Way</h3>
-            </div>
 
-            {/* List items */}
-            <div className="flex flex-col gap-6">
-              {SOLUTION_ITEMS.map((item) => (
-                <ComparisonItem
-                  key={item.title}
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.description}
-                  variant={item.variant}
-                />
-              ))}
+              {/* List items */}
+              <div className="flex flex-col gap-3 md:gap-6">
+                {SOLUTION_ITEMS.map((item) => (
+                  <ComparisonItem
+                    key={item.title}
+                    icon={item.icon}
+                    title={item.title}
+                    description={item.description}
+                    variant={item.variant}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 

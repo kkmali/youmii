@@ -40,14 +40,14 @@ export function ComparisonItem({
 
   return (
     <div
-      className={`flex gap-4 items-start p-5 rounded-2xl w-full ${containerStyles}${className ? ` ${className}` : ''}`}
+      className={`flex gap-2 sm:gap-4 items-start p-3 sm:p-5 rounded-2xl w-full ${containerStyles}${className ? ` ${className}` : ''}`}
     >
       <div className="shrink-0 mt-1">
         <Icon className={`size-5 ${iconStyles}`} />
       </div>
       <div className="flex-1 min-w-0 flex flex-col gap-1">
-        <p className="text-base font-semibold text-body-text leading-snug">{title}</p>
-        <p className="text-sm text-secondary leading-relaxed">{description}</p>
+        <p className="text-base font-semibold">{title}</p>
+        <p className="text-sm text-secondary">{description}</p>
       </div>
     </div>
   )

@@ -14,9 +14,9 @@ export default function App() {
 
       <main className="flex-1">
         <HeroSection />
-        <FeaturesSection />
-        <HowItWorksSection />
         <ComparisonSection />
+        <HowItWorksSection />
+        <FeaturesSection />
         <TestimonialsSection />
         <FaqSection />
       </main>

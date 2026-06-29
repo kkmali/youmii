@@ -14,6 +14,7 @@
   --primary: #ed5f18;
   --orange: #C94E10;
   --grey-border: #E5E5E5;
+  --light-grey-border: #EBEBEB;
   --card-bg: #f8f7f2;
   --grey-muted: #817874;
   --yellow-400: #ffa800;
@@ -30,6 +31,7 @@
   --stats-gr: linear-gradient(161deg, #ffffff 0%, rgba(252,223,203,0.5) 52%, rgba(255,255,255,0.6) 100%);
   --stats-border-gr: linear-gradient(161deg, #FFFFFF 0%, #ED5F1899 45%, #FFFFFF 94%);
   --how-it-works-gr: linear-gradient(180deg, #ffffff 26%, rgba(246,175,139,0.7) 74%, rgba(237,95,24,0.6) 99%);
+  --comparison-gr: linear-gradient(131deg, #ffffff 2%, rgba(251,217,193,0.76) 53%, rgba(249,190,151,0.6) 88%);
 }
 
 @theme {
@@ -40,6 +42,7 @@
   --color-orange: var(--orange);
   --color-secondary: var(--secondary);
   --color-grey-border: var(--grey-border);
+  --color-light-grey-border: var(--light-grey-border);
   --color-card-bg: var(--card-bg);
   --color-body-bg: var(--body-bg);
   --color-body-text: var(--body-text);
@@ -62,9 +65,11 @@
   --color-stats-gr: var(--stats-gr);
   --color-stats-border-gr: var(--stats-border-gr);
   --color-how-it-works-gr: var(--how-it-works-gr);
+  --color-comparison-gr: var(--comparison-gr);
 
   /* shadows */
   --shadow-100: 0px 4px 20px 0px rgba(237, 95, 24, 0.1);
+  --shadow-200: 0px 10px 40px 0px rgba(0,0,0,0.15);
   --shadow-10: 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
   --shadow-60: 0px 4px 4px 0px rgba(152, 152, 152, 0.15);
   --shadow-nav: 0px 1px 16px 0px rgba(0, 0, 0, 0.06);
