@@ -1,53 +1,7 @@
-import { AlertCircle, Sparkles, Frown, HeartCrack, AlarmClockOff, Award, BrainCircuit, Rocket } from 'lucide-react'
+import { Frown, Sparkles } from 'lucide-react'
 import { Heading } from '../ui/Heading'
 import { ComparisonItem } from '../cards/ComparisonItem'
-
-// ─── Panel data ───────────────────────────────────────────────────────────────
-
-const PROBLEM_ITEMS = [
-  {
-    icon: AlertCircle,
-    title: 'Generic Results',
-    description:
-      'Scrolling through review sites that treat everyone the same — no context, no taste, no you.',
-  },
-  {
-    icon: AlarmClockOff,
-    title: 'Decision Overload',
-    description:
-      'Too many options, no clear answer. You spend more time choosing than eating.',
-  },
-  {
-    icon: HeartCrack,
-    title: 'Wrong Fit',
-    description:
-      "A 4.8-star rating means nothing if the restaurant doesn't match your mood or dietary needs.",
-  },
-] as const
-
-const SOLUTION_ITEMS = [
-  {
-    icon: BrainCircuit,
-    title: 'AI-Powered Search',
-    description:
-      'Describe what you want in plain language — Swiss German, or English. Youmii finds it instantly.',
-    variant: 'solution-orange' as const,
-  },
-  {
-    icon: Rocket,
-    title: 'Discover by Mood',
-    description:
-      'Tap a mood chip — Romantic, Terrace, Business, Vegan — and see matched restaurants immediately.',
-    variant: 'solution-blue' as const,
-  },
-  {
-    icon: Award,
-    title: 'Book in the App',
-    description:
-      'Select your date, party size, and dietary needs. Reservation confirmed by push notification.',
-    variant: 'solution-orange' as const,
-  },
-] as const
+import { problemItems, solutionItems } from '../../utils/data'
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -88,7 +42,7 @@ export function ComparisonSection({ className = '' }: ComparisonSectionProps) {
 
             {/* List items */}
             <div className="flex flex-col gap-2 md:gap-6">
-              {PROBLEM_ITEMS.map((item) => (
+              {problemItems.map((item) => (
                 <ComparisonItem
                   key={item.title}
                   icon={item.icon}
@@ -115,7 +69,7 @@ export function ComparisonSection({ className = '' }: ComparisonSectionProps) {
 
               {/* List items */}
               <div className="flex flex-col gap-3 md:gap-6">
-                {SOLUTION_ITEMS.map((item) => (
+                {solutionItems.map((item) => (
                   <ComparisonItem
                     key={item.title}
                     icon={item.icon}

@@ -1,103 +1,7 @@
 import { useRef } from 'react'
 import { TestimonialCard } from '../cards/TestimonialCard'
-
-import bg1 from '../../assets/testimonial-bg-1.jpg'
-import bg2 from '../../assets/testimonial-bg-2.jpg'
-import bg3 from '../../assets/testimonial-bg-3.jpg'
-import bg4 from '../../assets/testimonial-bg-4.jpg'
-import avatarMarco from '../../assets/avatar-marco.jpg'
-import avatarDavid from '../../assets/avatar-david.jpg'
-import avatarElena from '../../assets/avatar-elena.jpg'
 import { Heading } from '../ui/Heading'
-
-/* ------------------------------------------------------------------ */
-/*  Static data                                                         */
-/* ------------------------------------------------------------------ */
-
-const TESTIMONIALS = [
-  {
-    id: 1,
-    backgroundImage: bg1,
-    quote:
-      "Hidden gem I never would've found. Table reserved in one tap. Quiet, elegant, perfectly paced.",
-    reviewerName: 'Marco Rossi',
-    reviewerLocation: 'Bern, Switzerland',
-    avatarSrc: avatarMarco,
-  },
-  {
-    id: 2,
-    backgroundImage: bg2,
-    quote:
-      'What really impressed me was how well the recommendations aligned with my dietary preferences and budget.',
-    reviewerName: 'David Meyer',
-    reviewerLocation: 'Geneva, Switzerland',
-    avatarSrc: avatarDavid,
-  },
-  {
-    id: 3,
-    backgroundImage: bg3,
-    quote:
-      '"The electric atmosphere and impeccable service were matched by the chef\'s bold yet delicate flavors — a culinary journey I won\'t soon forget."',
-    reviewerName: 'Elena Rossi',
-    reviewerLocation: 'Milan, Italy',
-    avatarSrc: avatarElena,
-  },
-  {
-    id: 4,
-    backgroundImage: bg4,
-    quote:
-      'This app transformed my Tokyo dining experience with spot-on recommendations and seamless booking.',
-    reviewerName: 'Sophie Blanc',
-    reviewerLocation: 'Zurich, Switzerland',
-    avatarSrc: avatarDavid,
-  },
-  {
-    id: 5,
-    backgroundImage: bg1,
-    quote:
-      "Hidden gem I never would've found. Table reserved in one tap. Quiet, elegant, perfectly paced.",
-    reviewerName: 'Marco Rossi',
-    reviewerLocation: 'Bern, Switzerland',
-    avatarSrc: avatarMarco,
-  },
-  {
-    id: 6,
-    backgroundImage: bg2,
-    quote:
-      'What really impressed me was how well the recommendations aligned with my dietary preferences and budget.',
-    reviewerName: 'David Meyer',
-    reviewerLocation: 'Geneva, Switzerland',
-    avatarSrc: avatarDavid,
-  },
-  {
-    id: 7,
-    backgroundImage: bg3,
-    quote:
-      '"The electric atmosphere and impeccable service were matched by the chef\'s bold yet delicate flavors — a culinary journey I won\'t soon forget."',
-    reviewerName: 'Elena Rossi',
-    reviewerLocation: 'Milan, Italy',
-    avatarSrc: avatarElena,
-  },
-  {
-    id: 8,
-    backgroundImage: bg4,
-    quote:
-      'This app transformed my Tokyo dining experience with spot-on recommendations and seamless booking.',
-    reviewerName: 'Sophie Blanc',
-    reviewerLocation: 'Zurich, Switzerland',
-    avatarSrc: avatarDavid,
-  },
-] as const
-
-/* ------------------------------------------------------------------ */
-/*  Stats row data                                                      */
-/* ------------------------------------------------------------------ */
-
-const STATS = [
-  { value: '240+', label: 'Restaurants' },
-  { value: '4.8★', label: 'App Rating' },
-  { value: '14,200+', label: 'Happy diners' },
-] as const
+import { testimonials, testimonialStats } from '../../utils/data'
 
 /* ------------------------------------------------------------------ */
 /*  Arrow button                                                        */
@@ -206,7 +110,7 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
           role="region"
           aria-label="Testimonials slider"
         >
-          {TESTIMONIALS.map((t) => (
+          {testimonials.map((t) => (
             <div key={t.id} className="snap-start shrink-0">
               <TestimonialCard
                 backgroundImage={t.backgroundImage}
@@ -218,13 +122,12 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
             </div>
           ))}
         </div>
+
         <div className="container">
           <div className="p-px bg-(image:--stats-border-gr) rounded-2xl shadow-[0px_6px_12px_0px_rgba(0,0,0,0.08)]">
-            <div
-              className="w-full rounded-2xl overflow-hidden border border-white bg-white"
-            >
+            <div className="w-full rounded-2xl overflow-hidden border border-white bg-white">
               <dl className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-grey-border">
-                {STATS.map((stat) => (
+                {testimonialStats.map((stat) => (
                   <div
                     key={stat.label}
                     className="flex flex-col items-center justify-center gap-1 sm:gap-1.5 p-3 sm:p-6 xl:p-8 flex-1"

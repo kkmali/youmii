@@ -23,7 +23,11 @@ src/
 ├── assets/               # Static images and SVGs — import locally, never reference Figma URLs
 ├── components/
 │   ├── layout/           # Header, Footer — one of each, no variants
-│   └── ui/               # Reusable primitives: Button, CtaBanner, …
+│   ├── sections/         # Page-level sections: HeroSection, FeaturesSection, …
+│   ├── cards/            # Card-level sub-components: FeatureCard, TeamMemberCard, …
+│   └── ui/               # Reusable primitives: Button, CtaBanner, Badge, Heading, …
+├── utils/
+│   └── data.ts           # ALL site data — sections, cards, footer, team, FAQs, etc.
 ├── App.tsx               # Root component — composes Header + main content + Footer
 ├── main.tsx              # React DOM entry point
 └── index.css             # Design tokens (:root), @theme mapping, @layer base
@@ -34,6 +38,7 @@ src/
 | File | Purpose |
 |---|---|
 | `src/index.css` | `:root` CSS variables (raw tokens) + `@theme` Tailwind mapping + `@layer base` resets |
+| `src/utils/data.ts` | Single source of truth for all site data — section arrays, card data, FAQs, team, testimonials, footer links, social links, etc. Always read/write data here, never inline it in components |
 | `src/App.tsx` | Root shell — `<Header /> + <main> + <Footer />` |
 | `src/components/index.ts` | Barrel — single import point for all public components |
 | `src/components/layout/Header.tsx` | Sticky nav with logo, nav pill, language switcher, mobile drawer |
@@ -71,6 +76,7 @@ npm run preview
 - Use **Tailwind CSS v4 utility classes** for all styling. No custom CSS in component files.
 - Use **theme utility classes** for all semantic color/border tokens registered in `@theme` (e.g., write **`text-primary`**, **`bg-card-bg`**, **`border-grey-border`**, **`text-body-text`**, **`bg-body-bg`**). Never use the CSS variable shorthand forms (e.g., do **not** use `bg-(--card-bg)`, `text-(--primary)`, or `border-(--grey-border)`) and do **not** use verbose syntax like `bg-[var(--primary)]`.
 - Use **gradient shorthand syntax** in Tailwind: always use the `bg-(image:--token-name)` syntax for theme gradients (e.g., `bg-(image:--primary-gr)`).
+- **New colors or gradients must be defined in `src/index.css` first.** Add the raw value to `:root`, register it in `@theme`, then use the resulting Tailwind utility class in components. Never use a raw hex or gradient value directly in a component.
 - Use **semantic token names** defined in `src/index.css`. Do not use arbitrary hex values or raw Tailwind palette colors (`text-orange-500`, `bg-slate-100`) in components.
 - Use **named shadow utilities** (`shadow-nav`, `shadow-100`, etc.). Do not write arbitrary shadow values.
 - Do **not** use inline `style={...}` except for raw gradient definitions that are not registered in the theme (such as the testimonials stats background gradient). Registered theme gradients must be styled using `bg-(image:...)`.
@@ -83,7 +89,8 @@ npm run preview
 - **Responsive first.** Mobile baseline is 360px. Test 360px, 640px, 768px, 1024px, 1440px, 1920px.
 - **No Figma MCP asset URLs** in any component or page. These are workspace-scoped temporary URLs that break in production. Download every image to `src/assets/`, import it (`import img from '@/assets/file.png'`), and reference `img` or `img.src`.
 - **Always use Lucide React icons.** Do not use raw inline SVGs for common icons or customize SVGs inside components. Import icons from `lucide-react` to keep style, line weights, and sizing consistent across all components.
-- **Use standard section padding.** For top/bottom padding of sections, always apply the `section` utility class (defined as `@utility section` in `src/index.css`) on the `<section>` element.
+- **Use standard section padding.** For top/bottom padding of sections, always apply the `section` utility class (defined as `@utility section` in `src/index.css`) on the `<section>` element. Never manually write `py-*` on a `<section>` — use `section` instead.
+- **All site data lives in `src/utils/data.ts`.** Section arrays, card data, FAQ entries, team members, testimonials, footer links, social links — everything. Never define data arrays inline inside section or card components. Import from `data.ts` and use directly.
 
 ---
 
@@ -137,9 +144,12 @@ Never suppress errors with `// @ts-ignore`, `eslint-disable`, or by deleting che
 - **Assets:** `kebab-case.png/svg/webp`
 - One default **or** named export per concept per file.
 - Co-locate types in the same file unless shared across multiple components.
-- New UI primitives go in `src/components/ui/`.
-- New page-level layout pieces go in `src/components/layout/`.
+- New UI primitives (Button, Badge, Heading, etc.) go in `src/components/ui/`.
+- New page-level sections (HeroSection, FaqSection, etc.) go in `src/components/sections/`.
+- New card-level sub-components (FeatureCard, TeamMemberCard, etc.) go in `src/components/cards/`.
+- New page-level layout pieces (Header, Footer) go in `src/components/layout/`.
 - Export every public component through `src/components/index.ts`.
+- All data arrays and site content belong in `src/utils/data.ts` — never inline them in components.
 
 ### 3.4 Images & Assets
 
@@ -199,27 +209,39 @@ All defined in `src/index.css :root`:
 | `--footer-bg` | `#ffffff` | Footer background |
 | `--footer-text` | `#16100d` | Footer text |
 | `--primary` | `#ed5f18` | Brand orange — CTAs, accents |
-| `--grey-border` | `#ededed` | Default borders, dividers |
+| `--orange` | `#C94E10` | Darker orange — stat values, highlights |
+| `--grey-border` | `#E5E5E5` | Default borders, dividers |
+| `--light-grey-border` | `#EBEBEB` | Lighter variant for card borders |
 | `--card-bg` | `#f8f7f2` | Card and subtle surface backgrounds |
 | `--grey-muted` | `#817874` | Alias for `--secondary` — muted text |
 | `--yellow-400` | `#ffa800` | Star ratings, highlights |
 | `--red-400` | `#ff3b30` | Error states |
-| `--brand-primary-subtle` | `#fcf3ed` | Subtle brand-tinted surface (Tailwind: `bg-(--brand-subtle)`) |
+| `--brand-primary-subtle` | `#fcf3ed` | Subtle brand-tinted surface (Tailwind: `bg-brand-subtle`) |
 | `--brand-border` | `rgba(237, 95, 24, 0.2)` | Subtle orange border (social icons, cards) |
-| `--badge-border` | `#ed5f18` | Badge/pill solid orange border |
+| `--golden` | `#E4B67D` | Warm gold accent |
+
+**Adding a new color:** add it to `:root` in `src/index.css`, register it under `@theme` as `--color-<name>: var(--<name>)`, then use the Tailwind utility `text-<name>` / `bg-<name>` in components.
 
 ### 4.3 Gradient Tokens
 
-Only gradients registered under `@theme` in `src/index.css` are listed here:
+All gradients are defined in `src/index.css :root` and registered in `@theme`. The complete list:
 
-| Token | Value | Usage |
-|---|---|---|
-| `--primary-gr` | `linear-gradient(to right, #ff934f, #ce4714)` | CTA buttons ("Download App") |
-| `--cta-gr` | `linear-gradient(166.1deg, #f6ad79 2.44%, #fdeee2 53.34%, #f6ad79 88.28%)` | CTA banner background |
-| `--badge-gr` | `linear-gradient(to right, #ED5F18 0%, #FFFFFF 56%)` | Badge pill background |
-| `--footer-gr` | `linear-gradient(to right, #F8BDA0 0%, #EDEDED 36%, #EDEDED 100%)` | Footer border/gradient (Note: theme maps `--color-footer-gr` to `var(--cta-gr)`) |
+| Token | Usage |
+|---|---|
+| `--primary-gr` | CTA buttons — `bg-(image:--primary-gr)` |
+| `--badge-gr` | Badge pill background — `bg-(image:--badge-gr)` |
+| `--cta-gr` | CTA banner background — `bg-(image:--cta-gr)` |
+| `--footer-gr` | Footer card border/gradient — `bg-(image:--footer-gr)` |
+| `--stats-gr` | Stats panel background — `bg-(image:--stats-gr)` |
+| `--stats-border-gr` | Stats panel border gradient — `bg-(image:--stats-border-gr)` |
+| `--how-it-works-gr` | How It Works section background — `bg-(image:--how-it-works-gr)` |
+| `--comparison-gr` | Comparison "Youmii Way" panel background — `bg-(image:--comparison-gr)` |
+| `--value-gr` | Values section background — `bg-(image:--value-gr)` |
+| `--hero-gr` | About hero section background — `bg-(image:--hero-gr)` |
 
 All theme gradients must be expressed using the Tailwind v4 gradient shorthand syntax `bg-(image:--token-name)`. Inline `style={{ background: 'var(--token)' }}` is **not** permitted for registered gradients.
+
+**Adding a new gradient:** add the raw value to `:root`, register it in `@theme` as `--color-<name>: var(--<name>)`, update this table, then use `bg-(image:--<name>)` in components.
 
 ### 4.4 Shadow Tokens
 
@@ -227,17 +249,20 @@ All theme gradients must be expressed using the Tailwind v4 gradient shorthand s
 |---|---|---|
 | `shadow-nav` | `0px 1px 16px 0px rgba(0,0,0,0.06)` | Nav pill |
 | `shadow-100` | `0px 4px 20px 0px rgba(237,95,24,0.1)` | Cards with brand glow |
+| `shadow-200` | `0px 10px 40px 0px rgba(0,0,0,0.15)` | Elevated panels, modals |
 | `shadow-10` | `0px 1px 2px -1px rgba(0,0,0,0.1)` | Subtle depth |
 | `shadow-60` | `0px 4px 4px 0px rgba(152,152,152,0.15)` | Mid-level cards |
 | `shadow-foot` | `-3px 0px 20px 0px rgba(237,95,24,0.15)` | Footer content card — left-side shadow |
 
 Always use named shadow utilities. Never write `shadow-[0px_4px_8px_...]`.
 
+**Adding a new shadow:** add it to `@theme` in `src/index.css` as `--shadow-<name>: <value>`, update this table, then use `shadow-<name>` in components.
+
 ### 4.5 Typography
 
-- **Font:** Plus Jakarta Sans (loaded from Google Fonts via `@import` in `src/index.css`)
+- **Font:** DM Sans (loaded from Google Fonts via `@import` in `src/index.css`)
 - **Weights available:** 300, 400, 500, 600, 700, 800 (+ italic 400)
-- **Stack:** `'Plus Jakarta Sans', system-ui, -apple-system, …` (defined as `--font-sans` in `@theme`)
+- **Stack:** `'DM Sans', system-ui, -apple-system, …` (defined as `--font-sans` in `@theme`)
 - Use standard Tailwind size utilities: `text-sm`, `text-base`, `text-xl`, `text-2xl`, etc.
 - Heading weight: `font-bold` (700) or `font-semibold` (600)
 - Body: `font-normal` (400), line-height `leading-relaxed` or `leading-snug`
@@ -247,9 +272,9 @@ Always use named shadow utilities. Never write `shadow-[0px_4px_8px_...]`.
 
 - Base spacing unit: Tailwind's 4px scale (`p-4` = 16px, `gap-6` = 24px, etc.)
 - **Fractional spacing:** Tailwind v4 supports `.5` increments (`gap-12.5` = 50px, `px-15` = 60px)
-- Container max-width: `max-w-[1600px] mx-auto` (defined as `max-w-400` in `@utility container`)
-- Container horizontal padding: `px-4 sm:px-6 lg:px-10`
-- Section vertical padding: `py-12 sm:py-16 lg:py-20` (adjust per section weight)
+- Container max-width: `max-w-7xl mx-auto` (defined as `@utility container` in `src/index.css`)
+- Container horizontal padding: `px-4`
+- **Section vertical padding:** always use the `section` utility class on `<section>` elements. It expands to `py-4 sm:py-6 md:py-8 lg:py-10 xl:py-12.5`. Never write manual `py-*` on a `<section>`.
 - No magic pixel values — use Tailwind scale or `clamp()` via a CSS variable if fluid scaling is needed.
 
 ### 4.7 Border Radius
@@ -395,7 +420,7 @@ Full-width footer. One design — no variants.
 - Copyright + social icon row (stacked/reversed on mobile, inline on `sm:+`)
 - Uses `shadow-foot` on the inner content card
 
-Footer link data is defined as a `const` inside the file. When it needs to be shared or CMS-driven, extract to `src/config/footer.ts`.
+Footer link data and social links are imported from `src/utils/data.ts`.
 
 ---
 
@@ -406,11 +431,14 @@ Footer link data is defined as a `const` inside the file. When it needs to be sh
 - Use Tailwind utility classes for all layout, spacing, color, and typography.
 - Use standard theme utility classes for semantic colors: write **`text-primary`**, **`bg-card-bg`**, **`border-grey-border`**, **`text-body-text`**, **`bg-body-bg`**, etc.
 - Use Tailwind v4 gradient syntax for theme gradients: `bg-(image:--token-name)` (e.g., `bg-(image:--primary-gr)`).
+- **Define new colors/gradients/shadows in `src/index.css` before using them.** Add to `:root`, register in `@theme`, then use the Tailwind utility — in that order.
 - Use named shadow utilities: `shadow-nav`, `shadow-100`, etc.
 - Use `rounded-full` for pill shapes, `rounded-2xl` or `rounded-[30px]` for banners.
 - Use `transition-colors` or `transition-opacity` for interactive state changes.
 - Pair `focus-visible:outline-2 focus-visible:outline-primary` (or `focus-visible:ring-2`) on all focusable elements.
 - Prioritize using existing UI primitives (`Button`, `PrimaryGradientButton`, `CtaBanner`, `Badge`) rather than writing similar styles/elements from scratch.
+- **Use the `section` utility class** on every `<section>` element for top/bottom padding. Never write manual `py-*` on sections.
+- **Get all data from `src/utils/data.ts`.** Import the relevant export — never write inline data arrays in section or card components.
 
 ### Never
 
@@ -467,6 +495,9 @@ If any box is unchecked, the task is **not done**.
 - ❌ Do **not** declare a task complete without running all three quality gates.
 - ❌ Do **not** add dark mode (`dark:` classes) — this project is light-only.
 - ❌ Do **not** hardcode nav links, footer links, or site metadata strings inside layout components — externalize to config when the list has more than 3–4 items.
+- ❌ Do **not** define inline data arrays in section or card components — all data belongs in `src/utils/data.ts`. Import and use.
+- ❌ Do **not** use a color, gradient, or shadow value that isn't already registered in `src/index.css`. Define it there first, then use the Tailwind utility.
+- ❌ Do **not** write manual `py-*` on `<section>` elements — always use the `section` utility class.
 
 ---
 

@@ -1,23 +1,5 @@
 import { CtaBanner } from '../ui/CtaBanner'
-import instagramSvg from '../../assets/icons/instagram.svg'
-import twitterSvg from '../../assets/icons/twitter.svg'
-import linkedinSvg from '../../assets/icons/linkedin.svg'
-import { footerLinks } from '../../utils/data'
-
-// ---------------------------------------------------------------------------
-// Data — extract to src/config/footer.ts when this grows or becomes CMS-driven
-// ---------------------------------------------------------------------------
-
-
-
-
-const socialLinks = [
-  { label: 'Instagram', icon: instagramSvg, href: 'https://instagram.com' },
-  { label: 'Twitter / X', icon: twitterSvg, href: 'https://twitter.com' },
-  { label: 'LinkedIn', icon: linkedinSvg, href: 'https://linkedin.com' },
-]
-
-// ---------------------------------------------------------------------------
+import { footerLinks, socialLinks } from '../../utils/data'
 
 export interface FooterProps {
   badge?: string
