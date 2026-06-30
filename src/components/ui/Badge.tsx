@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 
-export type BadgeVariant = 'primary' | 'secondary' | 'outline'
+export type BadgeVariant = 'primary' | 'secondary' | 'outline' | 'transparent'
 export type BadgeSize = 'lg' | 'md' | 'sm'
 
 export interface BadgeProps {
@@ -33,6 +33,19 @@ export function Badge({
       >
         {Icon && <Icon className="text-golden size-4" />}
         <span className="text-sm font-medium text-white whitespace-nowrap">
+          {text}
+        </span>
+      </div>
+    )
+  }
+
+  if (variant === 'transparent') {
+    return (
+      <div
+        className={`w-fit flex items-center gap-1.5 p-0! ${innerPadding}${className ? ` ${className}` : ''}`}
+      >
+        {Icon && <Icon className="text-orange size-5 xl:size-6"/>}
+        <span className="text-lg xl:text-xl font-medium text-orange whitespace-nowrap">
           {text}
         </span>
       </div>

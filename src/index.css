@@ -32,6 +32,8 @@
   --stats-border-gr: linear-gradient(161deg, #FFFFFF 0%, #ED5F1899 45%, #FFFFFF 94%);
   --how-it-works-gr: linear-gradient(180deg, #ffffff 26%, rgba(246,175,139,0.7) 74%, rgba(237,95,24,0.6) 99%);
   --comparison-gr: linear-gradient(131deg, #ffffff 2%, rgba(251,217,193,0.76) 53%, rgba(249,190,151,0.6) 88%);
+  --value-gr: linear-gradient(180deg, #ffffff 26%, rgba(249,190,151,0.6) 98%);
+  --hero-gr: radial-gradient(ellipse at 50% 50%, #ffe3c4 0%, #ffdec8 37%, #fff9ef 79%);
 }
 
 @theme {

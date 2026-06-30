@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Button } from '../ui/Button'
 import chevronDown from '../../assets/icons/chevron-down.svg'
 
 const navLinks = [
-  { label: 'About', href: '#about' },
+  { label: 'About', href: '/about' },
   { label: 'Partner with us', href: '#partner' },
   { label: 'Contact us', href: '#contact' },
 ]
@@ -124,6 +125,14 @@ function HamburgerIcon({ open }: { open: boolean }) {
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
+
+  const isActive = (href: string) => {
+    if (href.startsWith('#')) {
+      return location.hash === href
+    }
+    return location.pathname === href
+  }
 
   // Close drawer on resize to desktop breakpoint
   useEffect(() => {
@@ -148,24 +157,31 @@ export function Header() {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-2 md:py-3 flex items-center justify-between gap-4">
 
         {/* Logo */}
-        <a href="/" className="flex shrink-0 h-8 md:h-10">
+        <a href="/" className="flex shrink-0 h-8 lg:h-10">
           <img alt="" src="/youmii-logo.png" />
         </a>
 
         {/* Desktop nav pill */}
         <nav
-          className="hidden md:flex items-center border border-grey-border rounded-2xl shadow-nav bg-white px-3 py-2"
+          className="hidden md:flex items-center border border-grey-border rounded-2xl shadow-nav bg-white p-1.5 gap-1"
           aria-label="Main navigation"
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="px-4 py-2 text-sm font-medium text-header-text hover:text-header-text-hover focus-visible:outline-2 focus-visible:outline-primary focus-visible:rounded-lg transition-colors whitespace-nowrap rounded-lg"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const active = isActive(link.href)
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                className={`px-2.5 lg:px-4 py-2 text-sm font-medium transition-all duration-300 whitespace-nowrap rounded-xl ${
+                  active
+                    ? 'bg-primary text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+                    : 'text-header-text hover:text-header-text-hover focus-visible:outline-2 focus-visible:outline-primary'
+                }`}
+              >
+                {link.label}
+              </a>
+            )
+          })}
         </nav>
 
         {/* Desktop right actions */}
@@ -227,16 +243,21 @@ export function Header() {
 
           {/* Nav links */}
           <nav className="flex flex-col flex-1 px-5 pt-4" aria-label="Mobile navigation">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="py-3.5 text-base font-medium text-header-text hover:text-header-text-hover focus-visible:outline-2 focus-visible:outline-primary transition-colors border-b border-grey-border last:border-0"
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const active = isActive(link.href)
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={`py-3.5 text-base font-medium transition-colors border-b border-grey-border last:border-0 ${
+                    active ? 'text-primary font-semibold' : 'text-header-text hover:text-header-text-hover'
+                  } focus-visible:outline-2 focus-visible:outline-primary`}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </a>
+              )
+            })}
           </nav>
 
           {/* CTA */}

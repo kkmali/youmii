@@ -2,52 +2,14 @@ import { CtaBanner } from '../ui/CtaBanner'
 import instagramSvg from '../../assets/icons/instagram.svg'
 import twitterSvg from '../../assets/icons/twitter.svg'
 import linkedinSvg from '../../assets/icons/linkedin.svg'
+import { footerLinks } from '../../utils/data'
 
 // ---------------------------------------------------------------------------
 // Data — extract to src/config/footer.ts when this grows or becomes CMS-driven
 // ---------------------------------------------------------------------------
 
-// CTA props — used when showCta is true
-const footerCtaProps = {
-  badge: 'Your Table is Waiting',
-  headline: 'Discover. Match. Reserve.',
-  description:
-    'Download Youmii free and find your next great restaurant in Bern, Zurich, or Basel — tonight.',
-  buttonLabel: 'Download App',
-} as const
 
-const footerLinks = [
-  {
-    heading: 'Product',
-    links: [
-      { label: 'How it works', href: '#how-it-works' },
-      { label: 'GroupMatch', href: '#groupmatch' },
-      { label: 'For Restaurants', href: '#restaurants' },
-    ],
-  },
-  {
-    heading: 'Company',
-    links: [
-      { label: 'About', href: '#about' },
-      { label: 'Press', href: '#press' },
-      { label: 'Contact', href: '#contact' },
-    ],
-  },
-  {
-    heading: 'Support',
-    links: [
-      { label: 'FAQ', href: '#faq' },
-      { label: 'Contact Us', href: '#contact' },
-    ],
-  },
-  {
-    heading: 'Legal',
-    links: [
-      { label: 'Privacy Policy', href: '#privacy' },
-      { label: 'Terms of Service', href: '#terms' },
-    ],
-  },
-]
+
 
 const socialLinks = [
   { label: 'Instagram', icon: instagramSvg, href: 'https://instagram.com' },
@@ -57,21 +19,39 @@ const socialLinks = [
 
 // ---------------------------------------------------------------------------
 
-interface FooterProps {
-  /** Whether to show the CTA banner above the footer. Defaults to true. */
-  showCta?: boolean
+export interface FooterProps {
+  badge?: string
+  headline?: string
+  description?: string
+  buttonLabel?: string
+  buttonHref?: string
+  onButtonClick?: () => void
 }
 
-export function Footer({ showCta = true }: FooterProps) {
+export function Footer({
+  badge,
+  headline,
+  description,
+  buttonLabel,
+  buttonHref,
+  onButtonClick,
+}: FooterProps) {
   return (
-    <div className="bg-footer-bg w-full mb-6 md:mb-8 lg:mb-10">
-      <div className="max-w-[1600px] mx-auto">
+    <div className="bg-footer-bg w-full mb-4 sm:mb-6 md:mb-8 lg:mb-10">
+      <div className="max-w-[1600px] mx-auto px-4">
         <div className="bg-(image:--footer-gr) shadow-foot rounded-2xl p-px">
           <div className="flex flex-col gap-8 md:gap-10 lg:gap-12 px-4 sm:px-8 lg:px-12 xl:px-15 py-6 sm:py-8 lg:py-10 xl:py-12 bg-white rounded-2xl">
             {/* CTA banner (optional) */}
-            {showCta && (
+            {headline && (
               <div className="">
-                <CtaBanner {...footerCtaProps} />
+                <CtaBanner
+                  badge={badge}
+                  headline={headline}
+                  description={description}
+                  buttonLabel={buttonLabel}
+                  buttonHref={buttonHref}
+                  onButtonClick={onButtonClick}
+                />
               </div>
             )}
 

@@ -13,10 +13,10 @@ export interface CtaBannerProps {
 }
 
 export function CtaBanner({
-  badge = 'Your Table is Waiting',
+  badge,
   headline,
   description,
-  buttonLabel = 'Download App',
+  buttonLabel,
   onButtonClick,
   buttonHref,
   className = '',
@@ -43,15 +43,17 @@ export function CtaBanner({
       )}
 
       {/* CTA */}
-      <Button
-        role={buttonHref ? 'link' : 'button'}
-        url={buttonHref}
-        onClick={onButtonClick}
-        variant="primary"
-        className="w-full sm:w-auto"
-      >
-        {buttonLabel}
-      </Button>
+      {buttonLabel && (
+        <Button
+          role={buttonHref ? 'link' : 'button'}
+          url={buttonHref}
+          onClick={onButtonClick}
+          variant="primary"
+          className="w-full sm:w-auto"
+        >
+          {buttonLabel}
+        </Button>
+      )}
     </div>
   )
 }
