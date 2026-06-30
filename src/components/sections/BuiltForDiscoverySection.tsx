@@ -1,5 +1,5 @@
 import { type ComponentType } from 'react'
-import { Badge } from './Badge'
+import { Badge } from '../ui/Badge'
 
 export interface BuiltForDiscoverySectionProps {
   className?: string

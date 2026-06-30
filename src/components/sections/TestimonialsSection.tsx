@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { TestimonialCard } from './TestimonialCard'
+import { TestimonialCard } from '../cards/TestimonialCard'
 
 import bg1 from '../../assets/testimonial-bg-1.jpg'
 import bg2 from '../../assets/testimonial-bg-2.jpg'
@@ -8,7 +8,7 @@ import bg4 from '../../assets/testimonial-bg-4.jpg'
 import avatarMarco from '../../assets/avatar-marco.jpg'
 import avatarDavid from '../../assets/avatar-david.jpg'
 import avatarElena from '../../assets/avatar-elena.jpg'
-import { Heading } from './Heading'
+import { Heading } from '../ui/Heading'
 
 /* ------------------------------------------------------------------ */
 /*  Static data                                                         */

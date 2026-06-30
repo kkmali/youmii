@@ -1,5 +1,5 @@
-import { Heading } from './Heading'
-import { FaqItem } from './FaqItem'
+import { Heading } from '../ui/Heading'
+import { FaqItem } from '../ui/FaqItem'
 
 export interface FaqEntry {
   question: string

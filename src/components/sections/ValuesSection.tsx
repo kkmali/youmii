@@ -1,6 +1,6 @@
 import { Users, Calendar, BarChart2, TrendingUp } from 'lucide-react'
-import { Heading } from './Heading'
-import { ValueCard } from './ValueCard'
+import { Heading } from '../ui/Heading'
+import { ValueCard } from '../cards/ValueCard'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 

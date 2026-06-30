@@ -1,5 +1,5 @@
-import { Heading } from './Heading'
-import { StepCard } from './StepCard'
+import { Heading } from '../ui/Heading'
+import { StepCard } from '../cards/StepCard'
 import step1Img from '../../assets/how-it-works-step1.jpg'
 import step2Img from '../../assets/how-it-works-step2.jpg'
 import step3Img from '../../assets/how-it-works-step3.jpg'

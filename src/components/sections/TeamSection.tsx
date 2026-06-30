@@ -1,5 +1,5 @@
-import { Heading } from './Heading'
-import { TeamMemberCard } from './TeamMemberCard'
+import { Heading } from '../ui/Heading'
+import { TeamMemberCard } from '../cards/TeamMemberCard'
 import emmaWells from '../../assets/team-emma-wells.jpg'
 import jamesLim from '../../assets/team-james-lim.jpg'
 import sofiaNguyen from '../../assets/team-sofia-nguyen.jpg'

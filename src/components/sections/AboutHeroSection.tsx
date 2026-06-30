@@ -1,6 +1,6 @@
-import { Heart, Share2, Sparkles, UtensilsCrossed } from 'lucide-react'
-import { Badge } from './Badge'
-import { ReservationCard } from './ReservationCard'
+import { Heart, Share2, Sparkles } from 'lucide-react'
+import { Badge } from '../ui/Badge'
+import { ReservationCard } from '../cards/ReservationCard'
 import reservationThumb from '../../assets/about-hero-reservation-thumb.jpg'
 import restaurantCardImg from '../../assets/about-hero-restaurant-card.jpg'
 

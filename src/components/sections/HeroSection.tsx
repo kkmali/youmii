@@ -1,7 +1,7 @@
 import { Sparkles, WalletCards, MapPinned, Globe, UtensilsCrossed, Astroid } from 'lucide-react'
-import { Badge } from './Badge'
-import { Button } from './Button'
-import { HeroOrderCard } from './HeroOrderCard'
+import { Badge } from '../ui/Badge'
+import { Button } from '../ui/Button'
+import { HeroOrderCard } from '../cards/HeroOrderCard'
 
 
 export interface HeroSectionProps {

@@ -223,7 +223,7 @@ export function Header() {
           aria-modal="true"
           aria-label="Navigation menu"
           aria-hidden={!mobileOpen}
-          className={`fixed top-0 right-0 h-full w-[280px] bg-white z-50 flex flex-col shadow-foot transition-transform duration-300 ease-in-out ${
+          className={`fixed top-0 right-0 h-full w-70 bg-white z-50 flex flex-col shadow-foot transition-transform duration-300 ease-in-out ${
             mobileOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >

@@ -1,6 +1,6 @@
 import { AlertCircle, Sparkles, Frown, HeartCrack, AlarmClockOff, Award, BrainCircuit, Rocket } from 'lucide-react'
-import { Heading } from './Heading'
-import { ComparisonItem } from './ComparisonItem'
+import { Heading } from '../ui/Heading'
+import { ComparisonItem } from '../cards/ComparisonItem'
 
 // ─── Panel data ───────────────────────────────────────────────────────────────
 

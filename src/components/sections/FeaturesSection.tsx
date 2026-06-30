@@ -1,6 +1,6 @@
 import { Users, BookOpen, Brain, Laugh, MapPinned, FileClock } from 'lucide-react'
-import { Heading } from './Heading'
-import { FeatureCard } from './FeatureCard'
+import { Heading } from '../ui/Heading'
+import { FeatureCard } from '../cards/FeatureCard'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 

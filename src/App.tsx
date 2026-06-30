@@ -1,9 +1,9 @@
-import { HeroSection } from './components/ui/HeroSection'
-import { FeaturesSection } from './components/ui/FeaturesSection'
-import { HowItWorksSection } from './components/ui/HowItWorksSection'
-import { ComparisonSection } from './components/ui/ComparisonSection'
-import { TestimonialsSection } from './components/ui/TestimonialsSection'
-import { FaqSection } from './components/ui/FaqSection'
+import { HeroSection } from './components/sections/HeroSection'
+import { FeaturesSection } from './components/sections/FeaturesSection'
+import { HowItWorksSection } from './components/sections/HowItWorksSection'
+import { ComparisonSection } from './components/sections/ComparisonSection'
+import { TestimonialsSection } from './components/sections/TestimonialsSection'
+import { FaqSection } from './components/sections/FaqSection'
 
 import { useFooterCta } from './components'
 
