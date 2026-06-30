@@ -34,7 +34,7 @@ export function FaqSection({
           align="center-align"
         />
 
-        <ul className="flex flex-col gap-3 w-full max-w-[1024px] list-none p-0 m-0">
+        <ul className="flex flex-col gap-3 w-full max-w-5xl list-none p-0 m-0">
           {items.map((item, index) => (
             <li key={index}>
               <FaqItem

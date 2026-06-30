@@ -6,6 +6,7 @@ import { TestimonialsSection } from './components/sections/TestimonialsSection'
 import { FaqSection } from './components/sections/FaqSection'
 
 import { useFooterCta } from './components'
+import { steps } from './utils/data'
 
 export default function App() {
   useFooterCta({
@@ -21,7 +22,15 @@ export default function App() {
     <>
       <HeroSection />
       <ComparisonSection />
-      <HowItWorksSection />
+      <HowItWorksSection
+        badgeText="HOW IT WORKS"
+        title={
+          <>
+            From <span className="text-primary">Craving to Table</span> in Three Steps
+          </>
+        }
+        steps={steps}
+      />
       <FeaturesSection />
       <TestimonialsSection />
       <FaqSection />

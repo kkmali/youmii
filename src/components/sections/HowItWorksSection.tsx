@@ -1,26 +1,31 @@
+import type { ReactNode } from 'react'
 import { Heading } from '../ui/Heading'
 import { StepCard } from '../cards/StepCard'
-import { steps } from '../../utils/data'
+import type { StepItem } from '../../utils/data'
 
 export interface HowItWorksSectionProps {
+  badgeText?: string
+  title: ReactNode
+  steps: StepItem[]
   className?: string
 }
 
-export function HowItWorksSection({ className = '' }: HowItWorksSectionProps) {
+export function HowItWorksSection({
+  badgeText = 'HOW IT WORKS',
+  title,
+  steps,
+  className = '',
+}: HowItWorksSectionProps) {
   return (
     <section
-      className={`section bg-(image:--how-it-works-gr) ${className ? ` ${className}` : ''}`}
+      className={`section bg-(image:--how-it-works-gr)${className ? ` ${className}` : ''}`}
     >
       <div className="container flex flex-col gap-10 lg:gap-16">
 
         {/* Heading */}
         <Heading
-          badgeText="HOW IT WORKS"
-          title={
-            <>
-              From <span className="text-primary">Craving to Table</span> in Three Steps
-            </>
-          }
+          badgeText={badgeText}
+          title={title}
           align="center-align"
         />
 
@@ -28,11 +33,11 @@ export function HowItWorksSection({ className = '' }: HowItWorksSectionProps) {
         {/* Mobile: single column stack (no stagger).                   */}
         {/* Desktop (lg+): row with staggered vertical offsets via mt-* */}
         <div className="flex flex-col lg:flex-row lg:items-start gap-11">
-          {steps.map(({ step, title, description, imageSrc, imageAlt, offsetClass }) => (
+          {steps.map(({ step, title: stepTitle, description, imageSrc, imageAlt, offsetClass }) => (
             <StepCard
               key={step}
               step={step}
-              title={title}
+              title={stepTitle}
               description={description}
               imageSrc={imageSrc}
               imageAlt={imageAlt}

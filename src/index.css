@@ -22,6 +22,8 @@
   --brand-primary-subtle: #fcf3ed;
   --brand-border: rgba(237, 95, 24, 0.2);
   --golden: #E4B67D;
+  --input-bg: #f5f5f5;
+  --input-border: #f2efed;
 
   /* gradients */
   --primary-gr: linear-gradient(to right, #ff934f, #ce4714);
@@ -34,6 +36,7 @@
   --comparison-gr: linear-gradient(131deg, #ffffff 2%, rgba(251,217,193,0.76) 53%, rgba(249,190,151,0.6) 88%);
   --value-gr: linear-gradient(180deg, #ffffff 26%, rgba(249,190,151,0.6) 98%);
   --hero-gr: radial-gradient(ellipse at 50% 50%, #ffe3c4 0%, #ffdec8 37%, #fff9ef 79%);
+  --contact-hero-gr: linear-gradient(182deg, #fef8f6 8%, #fef8f6 48%, #fbded0 90%);
 }
 
 @theme {
@@ -58,6 +61,8 @@
   --color-brand-subtle: var(--brand-primary-subtle);
   --color-brand-border: var(--brand-border);
   --color-golden: var(--golden);
+  --color-input-bg: var(--input-bg);
+  --color-input-border: var(--input-border);
 
   /* gradients */
   --color-primary-gr: var(--primary-gr);
@@ -68,11 +73,15 @@
   --color-stats-border-gr: var(--stats-border-gr);
   --color-how-it-works-gr: var(--how-it-works-gr);
   --color-comparison-gr: var(--comparison-gr);
+  --color-value-gr: var(--value-gr);
+  --color-hero-gr: var(--hero-gr);
+  --color-contact-hero-gr: var(--contact-hero-gr);
 
   /* shadows */
   --shadow-100: 0px 4px 20px 0px rgba(237, 95, 24, 0.1);
   --shadow-200: 0px 10px 40px 0px rgba(0,0,0,0.15);
   --shadow-10: 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-300: 0px 6px 12px 0px rgba(0, 0, 0, 0.08);
   --shadow-60: 0px 4px 4px 0px rgba(152, 152, 152, 0.15);
   --shadow-nav: 0px 1px 16px 0px rgba(0, 0, 0, 0.06);
   --shadow-foot: -3px 0px 20px 0px rgba(237, 95, 24, 0.15);

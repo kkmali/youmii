@@ -18,6 +18,8 @@ import {
   Calendar,
   BarChart2,
   TrendingUp,
+  Sparkles,
+  RefreshCw,
 } from 'lucide-react'
 
 // ─── Asset imports ────────────────────────────────────────────────────────────
@@ -25,6 +27,10 @@ import {
 import step1Img from '../assets/how-it-works-step1.jpg'
 import step2Img from '../assets/how-it-works-step2.jpg'
 import step3Img from '../assets/how-it-works-step3.jpg'
+
+import partnerStep1Img from '../assets/partner-step1.jpg'
+import partnerStep2Img from '../assets/partner-step2.jpg'
+import partnerStep3Img from '../assets/partner-step3.jpg'
 
 import bg1 from '../assets/testimonial-bg-1.jpg'
 import bg2 from '../assets/testimonial-bg-2.jpg'
@@ -65,8 +71,8 @@ export interface StepItem {
   step: string
   title: string
   description: string
-  imageSrc: string
-  imageAlt: string
+  imageSrc?: string
+  imageAlt?: string
   offsetClass?: string
 }
 
@@ -136,22 +142,24 @@ export const footerLinks: FooterLinkGroup[] = [
     heading: 'Company',
     links: [
       { label: 'About', href: '/about' },
+      { label: 'Partner with us', href: '/partner-with-us' },
       { label: 'Press', href: '#press' },
-      { label: 'Contact', href: '#contact' },
+      { label: 'Contact', href: '/contact' },
     ],
   },
   {
     heading: 'Support',
     links: [
       { label: 'FAQ', href: '#faq' },
-      { label: 'Contact Us', href: '#contact' },
+      { label: 'Contact Us', href: '/contact' },
     ],
   },
   {
     heading: 'Legal',
     links: [
-      { label: 'Privacy Policy', href: '#privacy' },
+      { label: 'Privacy Policy', href: '/privacy-policy' },
       { label: 'Terms of Service', href: '#terms' },
+      { label: 'GDPR', href: '/gdpr' },
     ],
   },
 ]
@@ -360,7 +368,7 @@ export const testimonials: TestimonialItem[] = [
   },
 ]
 
-export const testimonialStats: StatItem[] = [
+export const statsData: StatItem[] = [
   { value: '240+', label: 'Restaurants' },
   { value: '4.8★', label: 'App Rating' },
   { value: '14,200+', label: 'Happy diners' },
@@ -430,6 +438,121 @@ export const teamMembers: TeamMember[] = [
   },
 ]
 
+// ─── Partner FAQs ─────────────────────────────────────────────────────────────
+
+export const partnerFaqs: FaqEntry[] = [
+  {
+    question: 'How do I list my restaurant on Youmii?',
+    answer:
+      "Joining Youmii is simple. Start by filling out our partner application form. Our team will review your details and verify your business. Once approved, you'll receive a welcome kit with everything you need to set up your profile, upload your menu, and start receiving reservations.",
+  },
+  {
+    question: 'What are the fees for restaurant partners?',
+    answer:
+      'Listing your restaurant on Youmii is free. We offer flexible plans for restaurants that want additional visibility, featured placements, or advanced analytics. Our team will walk you through all options after your application is approved.',
+  },
+  {
+    question: 'How does Youmii help me attract more customers?',
+    answer:
+      'Youmii surfaces your restaurant to thousands of active diners searching by mood, cuisine, dietary needs, and location. Our AI matching ensures your venue is shown to the diners most likely to love what you offer — not just those nearby.',
+  },
+  {
+    question: 'How do I manage my restaurant profile?',
+    answer:
+      'Once approved, you get access to the Youmii Partner Dashboard. From there you can update your menu, photos, opening hours, and special offers in real time. Any changes go live instantly across the app.',
+  },
+  {
+    question: 'How does the review and rating system work for partners?',
+    answer:
+      'Only verified diners who booked through Youmii can leave a review, keeping feedback genuine. Reviews cover food, service, ambience, and value. You can respond to reviews from your Partner Dashboard to build trust with potential guests.',
+  },
+  {
+    question: 'Can I run promotions or featured listings?',
+    answer:
+      'Yes. Youmii partners can create time-limited promotions, happy-hour deals, and seasonal menus that are prominently highlighted in search results. Featured placement options are also available for partners who want to boost visibility during peak periods.',
+  },
+]
+
+// ─── Partner form next-steps ──────────────────────────────────────────────────
+
+export const partnerFormNextSteps: StepItem[] = [
+  {
+    step: '01',
+    title: 'Submit your details',
+    description: 'Restaurant name, address, city, contact. ~3 min.',
+  },
+  {
+    step: '02',
+    title: 'We review & verify',
+    description: 'Manual verification within 2 business days.',
+  },
+  {
+    step: '03',
+    title: 'Go live',
+    description: 'Access your owner dashboard and start receiving bookings.',
+  },
+]
+
+// ─── Partner steps ─────────────────────────────────────────────────────────────
+
+export const partnerSteps: StepItem[] = [
+  {
+    step: '01',
+    title: 'List Your Restaurant',
+    description:
+      'Register your venue and create a complete profile. Add your menus, opening hours, high-quality photos, and unique selling points to showcase your brand.',
+    imageSrc: partnerStep1Img,
+    imageAlt: 'Restaurant listing interface on Youmii partner dashboard',
+  },
+  {
+    step: '02',
+    title: 'Reach More Guests',
+    description:
+      'Connect with a wide audience actively searching for dining experiences. Our platform filters by mood, cuisine, dietary needs, and location to ensure the right guests find you.',
+    imageSrc: partnerStep2Img,
+    imageAlt: 'Diners discovering restaurants through the Youmii app',
+    offsetClass: 'lg:mt-12',
+  },
+  {
+    step: '03',
+    title: 'Boost Your Bookings',
+    description:
+      'Receive reservation requests directly through the app. Manage confirmations in real-time and get notified instantly. No phone calls, no missed bookings, just more tables filled.',
+    imageSrc: partnerStep3Img,
+    imageAlt: 'Reservation confirmations flowing into the partner dashboard',
+    offsetClass: 'lg:mt-24',
+  },
+]
+
+// ─── Partner dashboard features ───────────────────────────────────────────────
+
+export interface PartnerFeatureItem {
+  icon: ComponentType<{ className?: string }>
+  title: string
+  description: string
+}
+
+export const partnerDashboardFeatures: PartnerFeatureItem[] = [
+  {
+    icon: Brain,
+    title: 'Your entire operation, one dashboard',
+    description:
+      'View bookings, manage your menu, and update your profile — all from one intuitive partner workspace.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Smart insights, always at a glance',
+    description:
+      'See reservation trends, peak hours, and guest preferences to make better decisions for your restaurant.',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Stay in sync across every channel',
+    description:
+      'Updates to your menu and availability reflect instantly everywhere diners discover you on Youmii.',
+  },
+]
+
 // ─── Values ───────────────────────────────────────────────────────────────────
 
 export const values: ValueItem[] = [
@@ -456,5 +579,152 @@ export const values: ValueItem[] = [
     title: 'Growth built together',
     description:
       "Our success is measured by yours. When restaurants thrive, we know we're doing our job right.",
+  },
+]
+
+// ─── Partner brand logos ──────────────────────────────────────────────────────
+
+import customerIoLogo from '../assets/customer-io.png'
+import doordashLogo from '../assets/Doordash.png'
+import mazeLogo from '../assets/maze.png'
+import monzoLogo from '../assets/monzo.png'
+import wealthSimpleLogo from '../assets/wealth-simple.png'
+
+export interface PartnerLogo {
+  name: string
+  src: string
+}
+
+export interface PartnerLogoTier {
+  label: string
+  logos: PartnerLogo[]
+}
+
+export const partnerLogoTiers: PartnerLogoTier[] = [
+  {
+    label: 'Trusted by the Best',
+    logos: [
+      { name: 'Wealthsimple', src: wealthSimpleLogo },
+      { name: 'DoorDash', src: doordashLogo },
+      { name: 'Customer.io', src: customerIoLogo },
+      { name: 'Maze', src: mazeLogo },
+      { name: 'Monzo', src: monzoLogo },
+    ],
+  },
+  {
+    label: 'Gastronomic Collaborations',
+    logos: [
+      { name: 'Monzo', src: monzoLogo },
+      { name: 'Customer.io', src: customerIoLogo },
+      { name: 'Maze', src: mazeLogo },
+      { name: 'DoorDash', src: doordashLogo },
+      { name: 'Wealthsimple', src: wealthSimpleLogo },
+    ],
+  },
+]
+
+// ─── Contact page ─────────────────────────────────────────────────────────────
+
+export interface ContactOffice {
+  city: string
+  addressLines: string[]
+}
+
+export const contactOffice: ContactOffice = {
+  city: 'Zürich, Switzerland',
+  addressLines: ['Bahnhofstrasse 1', '8001 Zürich', 'Switzerland'],
+}
+
+export interface ContactInfoPill {
+  label: string
+  value: string
+}
+
+export const contactInfoPills: ContactInfoPill[] = [
+  { label: 'Email', value: 'hello@youmii.com' },
+  { label: 'Location', value: 'Zürich, Switzerland' },
+  { label: 'Response time', value: 'Usually replies within 24h' },
+]
+
+// ─── Privacy policy ───────────────────────────────────────────────────────────
+
+export interface PolicySection {
+  heading: string
+  body: string
+}
+
+export const privacyPolicySections: PolicySection[] = [
+  {
+    heading: 'Introduction',
+    body: 'youmii ("youmii", "we", "us", or "our") owns and operates the platform located at youmii.app and all associated youmii mobile applications and services (collectively, the "Platform"). Through the Platform, we provide users ("you" or "Users") with access to AI-powered social experiences, personalised content discovery, smart matching features, and related services ("Services").',
+  },
+  {
+    heading: 'Applicability of this Privacy Policy',
+    body: 'This Privacy Policy describes what information youmii collects from Users on the publicly accessible areas of the Platform and how that information is used. This policy is governed by applicable data protection laws, including the EU General Data Protection Regulation (GDPR). By using the Platform, you confirm that you have read and understood this Privacy Policy.',
+  },
+  {
+    heading: 'Agreement to this Privacy Policy',
+    body: 'Your access to and use of the Platform is subject to your agreement with this Privacy Policy and our Terms of Use. By using the Platform, you expressly agree to the collection and use of your information as described in this document. If you do not agree with this Privacy Policy, please do not use or access the Platform. We recommend saving a copy of this policy for your records.',
+  },
+  {
+    heading: 'Modifications to this Privacy Policy',
+    body: 'youmii may update this Privacy Policy at any time. If we make material changes, we will notify you by posting a notice on the Platform or by sending an email to your registered address. The updated policy will take effect from the date of publication unless otherwise stated. Your continued use of the Platform after changes have been posted constitutes your acceptance of the revised Privacy Policy.',
+  },
+  {
+    heading: 'Contact and Complaints',
+    body: 'For questions, requests, or concerns regarding this Privacy Policy or the handling of your personal data, please contact us: youmii Data Protection Officer privacy@youmii.app. If you believe your data protection rights have not been respected, you have the right to lodge a complaint with the relevant supervisory authority in your jurisdiction. This Privacy Policy was last updated in June 2026 and applies to all users of youmii.app and associated youmii services.',
+  },
+]
+
+// ─── GDPR policy ──────────────────────────────────────────────────────────────
+
+export const gdprPolicySections: PolicySection[] = [
+  {
+    heading: 'Your Privacy Matters',
+    body: 'We are committed to protecting your personal information and handling it with transparency, security, and care. Your data is processed in accordance with GDPR and applicable privacy regulations.',
+  },
+  {
+    heading: 'Information We Collect',
+    body: 'We may collect personal details such as your name, email address, account information, preferences, device details, IP address, and website usage data to provide and improve our services.',
+  },
+  {
+    heading: 'How We Use Your Data',
+    body: 'Your information is used to manage your account, personalize your experience, provide customer support, improve our platform, communicate important updates, and maintain the security of our services.',
+  },
+  {
+    heading: 'Legal Basis for Processing',
+    body: 'We process personal data based on your consent, contractual necessity, legal obligations, legitimate business interests, or other lawful grounds permitted under GDPR.',
+  },
+  {
+    heading: 'Cookies & Tracking',
+    body: 'Cookies help us remember your preferences, improve website performance, analyze traffic, and enhance your browsing experience. You can manage your cookie preferences through your browser settings.',
+  },
+  {
+    heading: 'Data Sharing',
+    body: 'Your information may be shared with trusted service providers that support hosting, analytics, security, customer support, and other essential platform operations. We never sell your personal data.',
+  },
+  {
+    heading: 'Data Security',
+    body: 'We use industry-standard security measures to protect your information from unauthorized access, misuse, loss, or disclosure through technical and organizational safeguards.',
+  },
+  {
+    heading: 'Data Retention',
+    body: 'Personal data is retained only for as long as necessary to provide our services, comply with legal obligations, resolve disputes, and enforce our agreements before being securely deleted or anonymized.',
+  },
+  {
+    heading: 'Your GDPR Rights',
+    body: 'You have the right to access, update, delete, restrict, or object to the processing of your personal data, withdraw consent, request data portability, and file a complaint with the relevant data protection authority.',
+  },
+  {
+    heading: 'International Data Transfers',
+    body: 'If your information is transferred outside the European Economic Area, appropriate safeguards are implemented to ensure your personal data remains protected under GDPR standards.',
+  },
+  {
+    heading: "Children's Privacy",
+    body: 'Our services are not intended for children without appropriate parental consent, and we do not knowingly collect personal information from minors.',
+  },
+  {
+    heading: 'Policy Updates',
+    body: 'This Privacy Policy may be updated periodically to reflect changes in our services or legal requirements. Any revisions will be published on this page with the latest effective date.',
   },
 ]

@@ -2,7 +2,7 @@ export interface StepCardProps {
   step: string
   title: string
   description: string
-  imageSrc: string
+  imageSrc?: string
   imageAlt?: string
   className?: string
 }
@@ -33,14 +33,16 @@ export function StepCard({
           <p className="text-base text-secondary">{description}</p>
         </div>
 
-        {/* Step image */}
-        <div className="relative h-[190px] rounded-2xl overflow-hidden shrink-0 w-full">
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
+        {/* Step image — only rendered when an image is provided */}
+        {imageSrc && (
+          <div className="relative h-47.5 rounded-2xl overflow-hidden shrink-0 w-full">
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+        )}
       </div>
     </div>
   )

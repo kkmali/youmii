@@ -1,7 +1,8 @@
 import { useRef } from 'react'
 import { TestimonialCard } from '../cards/TestimonialCard'
 import { Heading } from '../ui/Heading'
-import { testimonials, testimonialStats } from '../../utils/data'
+import { StatsBar } from '../ui/StatsBar'
+import { testimonials, statsData } from '../../utils/data'
 
 /* ------------------------------------------------------------------ */
 /*  Arrow button                                                        */
@@ -124,21 +125,7 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
         </div>
 
         <div className="container">
-          <div className="p-px bg-(image:--stats-border-gr) rounded-2xl shadow-[0px_6px_12px_0px_rgba(0,0,0,0.08)]">
-            <div className="w-full rounded-2xl overflow-hidden border border-white bg-white">
-              <dl className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-grey-border">
-                {testimonialStats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="flex flex-col items-center justify-center gap-1 sm:gap-1.5 p-3 sm:p-6 xl:p-8 flex-1"
-                  >
-                    <dt className="text-2xl md:text-3xl font-bold text-orange">{stat.value}</dt>
-                    <dd className="text-sm font-medium text-secondary">{stat.label}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </div>
+          <StatsBar stats={statsData} />
         </div>
 
       </div>

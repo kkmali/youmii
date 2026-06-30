@@ -12,7 +12,7 @@ export function AboutHeroSection({ className = '' }: AboutHeroSectionProps) {
   return (
     <div className='px-4 lg:px-8 pt-2 md:pt-5 max-md:pb-4'>
       <section
-        className={`section pb-0 bg-(image:--hero-gr) rounded-4xl overflow-hidden${className ? ` ${className}` : ''}`}
+        className={`section pb-0 bg-(image:--hero-gr) rounded-2xl md:rounded-4xl overflow-hidden${className ? ` ${className}` : ''}`}
         aria-label="About hero"
       >
         <div className="container flex flex-col items-center gap-8 lg:gap-10">

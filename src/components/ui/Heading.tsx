@@ -11,6 +11,8 @@ export interface HeadingProps {
   subtitle?: ReactNode
   /** Alignment variant: 'center-align' or 'left-align'. Defaults to 'center-align'. */
   align?: 'center-align' | 'left-align'
+  /** Optional id applied to the h2 element — useful for aria-labelledby on a parent section */
+  id?: string
   /** Extra CSS classes to apply to the wrapper */
   className?: string
 }
@@ -24,6 +26,7 @@ export function Heading({
   title,
   subtitle,
   align = 'center-align',
+  id,
   className = '',
 }: HeadingProps) {
   const isCenter = align === 'center-align'
@@ -36,7 +39,7 @@ export function Heading({
     >
       {badgeText && <Badge text={badgeText} icon={Sparkles} />}
 
-      <h2 className="text-[clamp(24px,4vw,40px)] font-bold">
+      <h2 id={id} className="text-[clamp(24px,4vw,40px)] font-bold">
         {title}
       </h2>
 

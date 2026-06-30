@@ -5,8 +5,8 @@ import chevronDown from '../../assets/icons/chevron-down.svg'
 
 const navLinks = [
   { label: 'About', href: '/about' },
-  { label: 'Partner with us', href: '#partner' },
-  { label: 'Contact us', href: '#contact' },
+  { label: 'Partner with us', href: '/partner-with-us' },
+  { label: 'Contact us', href: '/contact' },
 ]
 
 const languages = [
