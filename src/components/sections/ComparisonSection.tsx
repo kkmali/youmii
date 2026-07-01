@@ -30,11 +30,11 @@ export function ComparisonSection({ className = '' }: ComparisonSectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 items-start">
 
           {/* ── Left: The Old Way ─────────────────────────────────── */}
-          <div className="rounded-4xl p-4 sm:p-6 lg:p-10 flex flex-col gap-3 sm:gap-6 md:gap-8">
+          <div className="rounded-4xl p-4 sm:p-6 lg:p-10 flex flex-col gap-3 sm:gap-6 md:gap-8 bg-grey-10 border border-light-grey-border">
 
             {/* Panel header */}
             <div className="flex items-center gap-4">
-              <div className="shrink-0 size-10 md:size-12 rounded-full bg-primary/12 flex items-center justify-center">
+              <div className="shrink-0 size-10 md:size-12 rounded-full bg-secondary/10 flex items-center justify-center">
                 <Frown className="size-4.5 md:size-5 text-secondary" />
               </div>
               <h3 className="text-xl sm:text-2xl font-semibold text-body-text">The Old Way</h3>

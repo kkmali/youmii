@@ -47,7 +47,7 @@ export function PartnerApplicationForm({
 
   return (
     <div
-      className={`bg-white border border-light-grey-border rounded-2xl px-5 py-6 sm:px-6 md:px-8 md:py-8 w-full lg:w-[60%]${className ? ` ${className}` : ''}`}
+      className={`bg-white border border-light-grey-border rounded-2xl px-5 py-6 sm:px-6 md:px-8 md:py-8 w-full lg:w-[60%] ${className ? ` ${className}` : ''}`}
     >
       {isSubmitSuccessful ? (
         <div className="flex flex-col items-center justify-center gap-4 py-0 lg:py-10 text-center">

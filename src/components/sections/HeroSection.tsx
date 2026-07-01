@@ -1,5 +1,6 @@
-import { Sparkles, WalletCards, MapPinned, Globe, UtensilsCrossed, Astroid } from 'lucide-react'
+import { WalletCards, MapPinned, Globe, UtensilsCrossed, Astroid } from 'lucide-react'
 import { Badge } from '../ui/Badge'
+import { Heading } from '../ui/Heading'
 import { Button } from '../ui/Button'
 import { HeroOrderCard } from '../cards/HeroOrderCard'
 
@@ -18,18 +19,18 @@ export function HeroSection({ className = '' }: HeroSectionProps) {
 
         {/* ── Top content: badge + headline + CTA ─────────────────────── */}
         <div className="flex flex-col items-center gap-3 sm:gap-4 text-center max-w-2xl">
-          <Badge text="AI-powered dining" variant="primary" icon={Sparkles} />
-
-          <h1 className="text-[clamp(28px,5vw,48px)] font-bold text-body-text leading-tight tracking-tight">
-            Find the{' '}
-            <span className="text-primary">food experiences</span>
-            {' '}made for you.
-          </h1>
-
-          <p className="text-sm sm:text-base md:text-lg text-secondary leading-relaxed max-w-xl">
-            Youmii matches you with restaurants for your mood and occasion — then
-            books the table. Now in Bern, Zurich, and Basel.
-          </p>
+          <Heading
+            badgeText="AI-powered dining"
+            title={
+              <>
+                Find the{' '}
+                <span className="text-primary">food experiences</span>
+                {' '}made for you.
+              </>
+            }
+            subtitle="Youmii matches you with restaurants for your mood and occasion — then books the table. Now in Bern, Zurich, and Basel."
+            size="lg"
+          />
 
           {/* QR + Download */}
           <div className="flex flex-col items-center gap-4 mt-2">

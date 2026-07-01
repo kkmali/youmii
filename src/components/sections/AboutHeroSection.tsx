@@ -1,5 +1,6 @@
 import { Heart, Share2, Sparkles } from 'lucide-react'
 import { Badge } from '../ui/Badge'
+import { Heading } from '../ui/Heading'
 import { ReservationCard } from '../cards/ReservationCard'
 import reservationThumb from '../../assets/about-hero-reservation-thumb.jpg'
 import restaurantCardImg from '../../assets/about-hero-restaurant-card.jpg'
@@ -18,19 +19,17 @@ export function AboutHeroSection({ className = '' }: AboutHeroSectionProps) {
         <div className="container flex flex-col items-center gap-8 lg:gap-10">
 
           {/* ── Headline block ───────────────────────────────────────── */}
-          <div className="flex flex-col items-center gap-3 text-center max-w-3xl">
-            <Badge text="AI-Powered Dining" icon={Sparkles} />
-
-            <h1 className="text-[clamp(28px,5vw,48px)] font-bold text-body-text leading-tight tracking-tight">
-              Our story starts with a simple{' '}
-              <span className="text-primary">love for food.</span>
-            </h1>
-
-            <p className="text-base sm:text-lg text-secondary leading-relaxed max-w-lg">
-              A love of food turned into a mission: make every dining decision
-              feel effortless. Now in Bern, Zurich, and Basel.
-            </p>
-          </div>
+          <Heading
+            badgeText="AI-Powered Dining"
+            title={
+              <>
+                Our story starts with a simple{' '}
+                <span className="text-primary">love for food.</span>
+              </>
+            }
+            subtitle="A love of food turned into a mission: make every dining decision feel effortless. Now in Bern, Zurich, and Basel."
+            size="lg"
+          />
 
           {/* ── Visuals block ────────────────────────────────────────── */}
           {/* Mobile: stacked image only */}

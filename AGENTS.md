@@ -229,7 +229,7 @@ All gradients are defined in `src/index.css :root` and registered in `@theme`. T
 | Token | Usage |
 |---|---|
 | `--primary-gr` | CTA buttons — `bg-(image:--primary-gr)` |
-| `--badge-gr` | Badge pill background — `bg-(image:--badge-gr)` |
+| `--badge-border-gr` | Badge pill background — `bg-(image:--badge-border-gr)` |
 | `--cta-gr` | CTA banner background — `bg-(image:--cta-gr)` |
 | `--footer-gr` | Footer card border/gradient — `bg-(image:--footer-gr)` |
 | `--stats-gr` | Stats panel background — `bg-(image:--stats-gr)` |

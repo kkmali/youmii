@@ -14,6 +14,8 @@
   --primary: #ed5f18;
   --orange: #C94E10;
   --grey-border: #E5E5E5;
+  --grey-10: #F6F3EF;
+  --grey-20: #FAFAFA;
   --light-grey-border: #EBEBEB;
   --card-bg: #f8f7f2;
   --grey-muted: #817874;
@@ -27,7 +29,8 @@
 
   /* gradients */
   --primary-gr: linear-gradient(to right, #ff934f, #ce4714);
-  --badge-gr: linear-gradient(to right, #ED5F18 0%, #FFFFFF 56%);
+  --badge-gr: linear-gradient(to right, #FFEDE0 0%, #FFFFFF 56%);
+  --badge-border-gr: linear-gradient(to right, #ED5F18 0%, #FFFFFF 100%);
   --cta-gr: linear-gradient(166.1deg, #f6ad79 2.44%, #fdeee2 53.34%, #f6ad79 88.28%);
   --footer-gr: linear-gradient(to right, #F8BDA0 0%, #EDEDED 36%, #EDEDED 100%);
   --stats-gr: linear-gradient(161deg, #ffffff 0%, rgba(252,223,203,0.5) 52%, rgba(255,255,255,0.6) 100%);
@@ -47,6 +50,8 @@
   --color-orange: var(--orange);
   --color-secondary: var(--secondary);
   --color-grey-border: var(--grey-border);
+  --color-grey-10: var(--grey-10);
+  --color-grey-20: var(--grey-20);
   --color-light-grey-border: var(--light-grey-border);
   --color-card-bg: var(--card-bg);
   --color-body-bg: var(--body-bg);
@@ -66,7 +71,7 @@
 
   /* gradients */
   --color-primary-gr: var(--primary-gr);
-  --color-badge-gr: var(--badge-gr);
+  --color-badge-border-gr: var(--badge-border-gr);
   --color-cta-gr: var(--cta-gr);
   --color-footer-gr: var(--footer-gr);
   --color-stats-gr: var(--stats-gr);
@@ -78,9 +83,10 @@
   --color-contact-hero-gr: var(--contact-hero-gr);
 
   /* shadows */
+  --shadow-badge: -3px 0px 4px 0px rgba(237, 95, 24, 0.3);
   --shadow-100: 0px 4px 20px 0px rgba(237, 95, 24, 0.1);
   --shadow-200: 0px 10px 40px 0px rgba(0,0,0,0.15);
-  --shadow-10: 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-10: 0px 2px 8px 0px rgba(0, 0, 0, 0.06);
   --shadow-300: 0px 6px 12px 0px rgba(0, 0, 0, 0.08);
   --shadow-60: 0px 4px 4px 0px rgba(152, 152, 152, 0.15);
   --shadow-nav: 0px 1px 16px 0px rgba(0, 0, 0, 0.06);

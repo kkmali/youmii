@@ -36,7 +36,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         aria-required={required}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${inputId}-error` : undefined}
-        className={`w-full bg-input-bg border rounded-full px-4 py-2.5 text-sm text-body-text placeholder:text-secondary/60 transition-colors focus-visible:outline-2 focus-visible:outline-primary focus-visible:bg-white${
+        className={`w-full bg-input-bg border rounded-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm text-body-text placeholder:text-secondary/60 transition-colors focus-visible:outline-2 focus-visible:outline-primary focus-visible:bg-white${
           error ? ' border-red-400 focus-visible:outline-red-400' : ' border-input-border'
         }`}
         {...rest}

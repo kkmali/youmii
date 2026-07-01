@@ -21,6 +21,7 @@ export function PartnerHeroSection({ className = '' }: PartnerHeroSectionProps) 
               </>
             }
             subtitle="Join a growing network of restaurants in Bern, Zurich, and Basel. We help you attract more diners, reduce no-shows, and grow with ease."
+            size='lg'
           />
           <img
             src="/partner-hero.png"

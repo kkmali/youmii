@@ -29,6 +29,7 @@ export default function ContactUsPage() {
         subtitle="We're a small team based in Zürich — we read every message."
         infoPills={infoPills}
         backgroundClass="bg-(image:--contact-hero-gr)"
+        size='lg'
       />
 
       {/* Content: office info + form */}

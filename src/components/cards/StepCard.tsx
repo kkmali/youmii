@@ -26,11 +26,11 @@ export function StepCard({
       </div>
 
       {/* Card body */}
-      <div className="bg-white border border-grey-border rounded-2xl lg:rounded-3xl shadow-[0px_10px_15px_rgba(28,18,8,0.08)] flex flex-col gap-5 pt-10 lg:pt-16 pb-5 sm:pb-6 md:pb-8 px-5 sm:px-6 md:px-8 w-full">
+      <div className="bg-white border border-grey-border rounded-2xl lg:rounded-3xl shadow-[0px_10px_15px_rgba(28,18,8,0.08)] flex flex-col gap-3 sm:gap-5 pt-8 sm:pt-10 lg:pt-16 pb-5 sm:pb-6 md:pb-8 px-5 sm:px-6 md:px-8 w-full">
         {/* Text content */}
-        <div className="flex flex-col gap-2.5">
-          <h3 className="text-2xl font-semibold">{title}</h3>
-          <p className="text-base text-secondary">{description}</p>
+        <div className="flex flex-col gap-1.5 sm:gap-2.5">
+          <h3 className="text-xl sm:text-2xl font-semibold">{title}</h3>
+          <p className="text-sm sm:text-base text-secondary">{description}</p>
         </div>
 
         {/* Step image — only rendered when an image is provided */}

@@ -22,7 +22,7 @@ export function Footer({
     <div className="bg-footer-bg w-full mb-4 sm:mb-6 md:mb-8 lg:mb-10">
       <div className="max-w-[1600px] mx-auto px-4">
         <div className="bg-(image:--footer-gr) shadow-foot rounded-2xl p-px">
-          <div className="flex flex-col gap-8 md:gap-10 lg:gap-12 px-4 sm:px-8 lg:px-12 xl:px-15 py-6 sm:py-8 lg:py-10 xl:py-12 bg-white rounded-2xl">
+          <div className="flex flex-col gap-8 md:gap-10 lg:gap-12 px-4 sm:px-8 lg:px-12 xl:px-15 py-6 sm:py-8 lg:py-10 xl:py-12 bg-grey-20 rounded-2xl">
             {/* CTA banner (optional) */}
             {headline && (
               <div className="">

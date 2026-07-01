@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Heading } from '../ui/Heading'
+import type { HeadingProps } from '../ui/Heading'
 
 export interface HeroInfoPill {
   icon: ReactNode
@@ -13,12 +14,9 @@ export interface PageHeroSectionProps {
   infoPills?: HeroInfoPill[]
   backgroundClass?: string
   className?: string
+  size?: HeadingProps['size']
 }
 
-/**
- * Reusable page-level hero section with gradient background,
- * badge, heading, subtitle, and optional info pills.
- */
 export function PageHeroSection({
   badgeText,
   title,
@@ -26,11 +24,12 @@ export function PageHeroSection({
   infoPills,
   backgroundClass = 'bg-(image:--hero-gr)',
   className = '',
+  size,
 }: PageHeroSectionProps) {
   return (
     <div className="px-4 lg:px-8 pt-2 md:pt-5 max-md:pb-4">
       <section
-        className={`section ${backgroundClass} rounded-2xl md:rounded-4xl overflow-hidden${className ? ` ${className}` : ''}`}
+        className={`section ${backgroundClass} rounded-2xl md:rounded-4xl overflow-hidden${className ? ` ${className}` : ''} min-h-50 flex justify-center items-center`}
         aria-label="Page hero"
       >
         <div className="container flex flex-col items-center gap-5">
@@ -38,6 +37,7 @@ export function PageHeroSection({
             badgeText={badgeText}
             title={title}
             subtitle={subtitle}
+            size={size}
           />
 
           {infoPills && infoPills.length > 0 && (

@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 import { TestimonialCard } from '../cards/TestimonialCard'
 import { Heading } from '../ui/Heading'
 import { StatsBar } from '../ui/StatsBar'
@@ -22,7 +22,7 @@ function ArrowButton({ direction, onClick, disabled = false, className = '' }: A
       onClick={onClick}
       disabled={disabled}
       aria-label={direction === 'left' ? 'Previous testimonials' : 'Next testimonials'}
-      className={`flex items-center justify-center size-10 rounded-full bg-brand-subtle border border-brand-border transition-all duration-200 hover:shadow-100 hover:border-primary focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 disabled:opacity-40 disabled:pointer-events-none cursor-pointer${className ? ` ${className}` : ''}`}
+      className={`flex items-center justify-center size-10 rounded-full bg-brand-subtle border border-brand-border transition-all duration-200 enabled:hover:shadow-100 enabled:hover:border-primary focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer${className ? ` ${className}` : ''}`}
     >
       <svg
         width="20"
@@ -61,12 +61,37 @@ export interface TestimonialsSectionProps {
  */
 export function TestimonialsSection({ className = '' }: TestimonialsSectionProps) {
   const trackRef = useRef<HTMLDivElement>(null)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(true)
+
+  /** Update disabled state based on current scroll position */
+  const updateScrollState = useCallback(() => {
+    const track = trackRef.current
+    if (!track) return
+    // 1px tolerance to account for sub-pixel rounding
+    setCanScrollLeft(track.scrollLeft > 1)
+    setCanScrollRight(track.scrollLeft + track.clientWidth < track.scrollWidth - 1)
+  }, [])
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+    // Set initial state once layout is ready
+    updateScrollState()
+    track.addEventListener('scroll', updateScrollState, { passive: true })
+    // Re-check on resize (e.g. window resize changes card widths)
+    const ro = new ResizeObserver(updateScrollState)
+    ro.observe(track)
+    return () => {
+      track.removeEventListener('scroll', updateScrollState)
+      ro.disconnect()
+    }
+  }, [updateScrollState])
 
   /** Scroll the track by ±(card width + gap) */
   function slide(direction: 'left' | 'right') {
     const track = trackRef.current
     if (!track) return
-    // card width + gap-6 (24px)
     const card = track.querySelector('article') as HTMLElement | null
     const cardWidth = card ? card.offsetWidth + 24 : 320
     track.scrollBy({ left: direction === 'left' ? -cardWidth : cardWidth, behavior: 'smooth' })
@@ -98,8 +123,8 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
 
             {/* Right: arrow nav buttons */}
             <div className="hidden md:flex items-center gap-2 shrink-0">
-              <ArrowButton direction="left" onClick={() => slide('left')} />
-              <ArrowButton direction="right" onClick={() => slide('right')} />
+              <ArrowButton direction="left" onClick={() => slide('left')} disabled={!canScrollLeft} />
+              <ArrowButton direction="right" onClick={() => slide('right')} disabled={!canScrollRight} />
             </div>
           </div>
         </div>

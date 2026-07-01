@@ -44,7 +44,7 @@ export function ContactForm({
   }
 
   return (
-    <div className={`flex flex-col gap-6 w-full${className ? ` ${className}` : ''}`}>
+    <div className={`flex flex-col gap-3 md:gap-6 w-full${className ? ` ${className}` : ''}`}>
       <h2 className="text-xl sm:text-2xl font-semibold text-body-text">
         Let&apos;s connect
       </h2>
