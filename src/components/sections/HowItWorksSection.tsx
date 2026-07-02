@@ -18,6 +18,7 @@ export function HowItWorksSection({
 }: HowItWorksSectionProps) {
   return (
     <section
+      id="how-it-works"
       className={`section bg-(image:--how-it-works-gr)${className ? ` ${className}` : ''}`}
     >
       <div className="container flex flex-col gap-10 lg:gap-16">

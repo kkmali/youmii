@@ -1,3 +1,5 @@
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
 import { CtaBanner } from '../ui/CtaBanner'
 import { footerLinks, socialLinks } from '../../utils/data'
 
@@ -18,11 +20,59 @@ export function Footer({
   buttonHref,
   onButtonClick,
 }: FooterProps) {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const pendingHashRef = useRef<string | null>(null)
+
+  const HEADER_OFFSET = 80
+
+  const scrollToId = (id: string) => {
+    const el = document.getElementById(id)
+    if (!el) return false
+    const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET
+    window.scrollTo({ top, behavior: 'smooth' })
+    return true
+  }
+
+  // Whenever pendingHashRef is set and we're on "/", poll until the element
+  // exists and scroll to it. Runs on every location change so it catches both
+  // cross-page navigation (pathname changes) and same-page clicks (key changes).
+  useEffect(() => {
+    const id = pendingHashRef.current
+    if (!id || location.pathname !== '/') return
+    pendingHashRef.current = null
+
+    let attempts = 0
+    const interval = setInterval(() => {
+      attempts++
+      if (scrollToId(id) || attempts >= 40) clearInterval(interval)
+    }, 30)
+    return () => clearInterval(interval)
+  }, [location.pathname, location.key])
+
+  function handleHashLink(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    e.preventDefault()
+    const id = href.replace(/^.*#/, '')
+
+    if (location.pathname === '/') {
+      // Already on home — poll directly, no navigation needed
+      let attempts = 0
+      const interval = setInterval(() => {
+        attempts++
+        if (scrollToId(id) || attempts >= 40) clearInterval(interval)
+      }, 30)
+      return
+    }
+
+    // On another page — store the target, navigate home, let the effect scroll
+    pendingHashRef.current = id
+    navigate('/')
+  }
   return (
     <div className="bg-footer-bg w-full mb-4 sm:mb-6 md:mb-8 lg:mb-10">
       <div className="max-w-[1600px] mx-auto px-4">
         <div className="bg-(image:--footer-gr) shadow-foot rounded-2xl p-px">
-          <div className="flex flex-col gap-8 md:gap-10 lg:gap-12 px-4 sm:px-8 lg:px-12 xl:px-15 py-6 sm:py-8 lg:py-10 xl:py-12 bg-grey-20 rounded-2xl">
+          <div className="flex flex-col gap-8 md:gap-10 lg:gap-12 px-4 sm:px-8 lg:px-12 xl:px-15 py-4 sm:py-8 lg:py-10 xl:py-12 bg-grey-20 rounded-2xl">
             {/* CTA banner (optional) */}
             {headline && (
               <div className="">
@@ -66,6 +116,7 @@ export function Footer({
                           <a
                             key={link.label}
                             href={link.href}
+                            onClick={link.href.includes('#') ? (e) => handleHashLink(e, link.href) : undefined}
                             className="text-sm text-secondary hover:text-primary focus-visible:outline-2 focus-visible:outline-primary focus-visible:rounded-sm transition-colors"
                           >
                             {link.label}

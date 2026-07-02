@@ -9,6 +9,8 @@ import PartnerWithUsPage from './pages/PartnerWithUs.tsx'
 import ContactUsPage from './pages/ContactUs.tsx'
 import PrivacyPolicyPage from './pages/PrivacyPolicy.tsx'
 import GdprPage from './pages/Gdpr.tsx'
+import TermsPage from './pages/Terms.tsx'
+import FaqPage from './pages/Faq.tsx'
 import NotFoundPage from './pages/NotFound.tsx'
 
 createRoot(document.getElementById('root')!).render(
@@ -22,6 +24,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/contact" element={<ContactUsPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/gdpr" element={<GdprPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/faq" element={<FaqPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

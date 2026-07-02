@@ -67,9 +67,9 @@ export function Badge({
 
   return (
     <div className={`bg-(image:--badge-border-gr) rounded-full shadow-badge w-fit p-px${className ? ` ${className}` : ''}`}>
-      <div className={`flex items-center gap-2 bg-(image:--badge-gr) ${innerPadding} rounded-full bg-white`}>
-        {Icon && <Icon className="text-primary size-4" />}
-        <span className="text-xs font-medium uppercase tracking-wide text-primary whitespace-nowrap">
+      <div className={`flex items-center gap-1 sm:gap-2 bg-(image:--badge-gr) ${innerPadding} rounded-full bg-white`}>
+        {Icon && <Icon className="text-primary size-3 sm:size-4" />}
+        <span className="text-[10px] sm:text-xs font-medium uppercase tracking-wide text-primary whitespace-nowrap">
           {text}
         </span>
       </div>

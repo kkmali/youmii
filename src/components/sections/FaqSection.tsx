@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Heading } from '../ui/Heading'
 import { FaqItem } from '../ui/FaqItem'
 import { defaultFaqs } from '../../utils/data'
@@ -15,6 +16,7 @@ export interface FaqSectionProps {
 
 /**
  * FAQ section — renders a Heading and an accordion list of FaqItem components.
+ * Only one item can be open at a time; opening a new one closes the previous.
  * All content is prop-driven with sensible defaults.
  */
 export function FaqSection({
@@ -24,6 +26,13 @@ export function FaqSection({
   items = defaultFaqs,
   className = '',
 }: FaqSectionProps) {
+  // First item is open by default; null means all closed
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
+
+  function handleToggle(index: number) {
+    setOpenIndex((prev) => (prev === index ? null : index))
+  }
+
   return (
     <section className={`section${className ? ` ${className}` : ''}`}>
       <div className="container flex flex-col items-center gap-6 md:gap-10">
@@ -40,7 +49,8 @@ export function FaqSection({
               <FaqItem
                 question={item.question}
                 answer={item.answer}
-                defaultOpen={index === 0}
+                isOpen={openIndex === index}
+                onToggle={() => handleToggle(index)}
               />
             </li>
           ))}

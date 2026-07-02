@@ -26,11 +26,11 @@ export function BuiltForDiscoverySection({
       {...(title ? { 'aria-labelledby': 'built-for-discovery-heading' } : {})}
     >
       <div className="container">
-        <div className={`flex flex-col md:flex-row md:items-center justify-between gap-6 lg:gap-10 xl:gap-16${className ? ` ${className}` : ''}`}>
+        <div className={`flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 lg:gap-10 xl:gap-16${className ? ` ${className}` : ''}`}>
 
           {/* Left — badge + heading */}
           {(badgeText || title) && (
-            <div className="flex flex-col gap-2 sm:gap-4 flex-[1_0_0] min-w-0">
+            <div className="flex flex-col max-md:items-center gap-2 sm:gap-4 flex-[1_0_0] min-w-0">
               {badgeText && <Badge text={badgeText} icon={badgeIcon} />}
               {title && (
                 <h2
@@ -57,7 +57,7 @@ export function BuiltForDiscoverySection({
           {/* Right — body text */}
           {description && (
             <div className="flex flex-col justify-center flex-[1_0_0] min-w-0">
-              <p className="text-base sm:text-lg text-secondary leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg text-secondary max-md:text-center">
                 {description}
               </p>
             </div>

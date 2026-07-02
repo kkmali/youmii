@@ -135,7 +135,7 @@ export const footerLinks: FooterLinkGroup[] = [
     links: [
       { label: 'How it works', href: '#how-it-works' },
       { label: 'GroupMatch', href: '#groupmatch' },
-      { label: 'For Restaurants', href: '#restaurants' },
+      { label: 'For Restaurants', href: '/partner-with-us' },
     ],
   },
   {
@@ -143,14 +143,12 @@ export const footerLinks: FooterLinkGroup[] = [
     links: [
       { label: 'About', href: '/about' },
       { label: 'Partner with us', href: '/partner-with-us' },
-      { label: 'Press', href: '#press' },
-      { label: 'Contact', href: '/contact' },
     ],
   },
   {
     heading: 'Support',
     links: [
-      { label: 'FAQ', href: '#faq' },
+      { label: 'FAQ', href: '/faq' },
       { label: 'Contact Us', href: '/contact' },
     ],
   },
@@ -158,7 +156,7 @@ export const footerLinks: FooterLinkGroup[] = [
     heading: 'Legal',
     links: [
       { label: 'Privacy Policy', href: '/privacy-policy' },
-      { label: 'Terms of Service', href: '#terms' },
+      { label: 'Terms of Service', href: '/terms' },
       { label: 'GDPR', href: '/gdpr' },
     ],
   },
@@ -726,5 +724,66 @@ export const gdprPolicySections: PolicySection[] = [
   {
     heading: 'Policy Updates',
     body: 'This Privacy Policy may be updated periodically to reflect changes in our services or legal requirements. Any revisions will be published on this page with the latest effective date.',
+  },
+]
+
+// ─── Terms of Service ─────────────────────────────────────────────────────────
+
+export const termsPolicySections: PolicySection[] = [
+  {
+    heading: 'Introduction',
+    body: 'Welcome to youmii. youmii AG ("youmii", "we", "us", or "our") operates the platform available at youmii.app and all associated youmii mobile applications and services (collectively, the "Platform"). By accessing or using the Platform, you agree to be bound by these Terms of Service ("Terms"). Please read them carefully before using our services.',
+  },
+  {
+    heading: 'Acceptance of Terms',
+    body: 'By creating an account, downloading the app, or otherwise accessing the Platform, you confirm that you are at least 16 years of age and that you have read, understood, and agree to be bound by these Terms and our Privacy Policy. If you do not agree, you must not use the Platform.',
+  },
+  {
+    heading: 'Description of Services',
+    body: 'youmii is an AI-powered restaurant discovery and reservation platform that helps users in Switzerland — currently Bern, Zurich, and Basel — find, match with, and book tables at local restaurants. Features include personalised search, AI-powered recommendations, group matching, real-time availability, and verified diner reviews. Services are provided "as is" and may be updated or discontinued at any time.',
+  },
+  {
+    heading: 'User Accounts',
+    body: 'To access certain features you must create an account. You are responsible for keeping your login credentials confidential and for all activity that occurs under your account. You must provide accurate and up-to-date information during registration. youmii reserves the right to suspend or terminate accounts that violate these Terms or are used fraudulently.',
+  },
+  {
+    heading: 'Acceptable Use',
+    body: 'You agree to use the Platform only for lawful purposes and in a way that does not infringe the rights of others or restrict their use of the Platform. Prohibited conduct includes: misrepresenting your identity, posting false or misleading reviews, scraping or reverse-engineering the Platform, attempting to gain unauthorised access to any systems, or using the Platform to transmit spam or malicious content.',
+  },
+  {
+    heading: 'Restaurant Reservations',
+    body: 'youmii facilitates reservations between users and partner restaurants. While we strive to ensure accuracy, we cannot guarantee real-time availability or the actions of third-party restaurant partners. Reservation confirmations are subject to the individual restaurant\'s policies. youmii is not liable for no-shows, cancellations by the restaurant, or disputes arising from a dining experience.',
+  },
+  {
+    heading: 'Reviews & User Content',
+    body: 'Only verified diners who completed a reservation through youmii may submit a review. By submitting a review or any other content to the Platform, you grant youmii a non-exclusive, royalty-free, worldwide licence to display, reproduce, and distribute that content as part of the Platform. You remain responsible for ensuring your content is accurate and does not violate any third-party rights or applicable laws.',
+  },
+  {
+    heading: 'Intellectual Property',
+    body: 'All content, trademarks, logos, software, and other intellectual property on the Platform are owned by or licensed to youmii AG. You may not copy, modify, distribute, or create derivative works from any part of the Platform without our prior written consent. Personal, non-commercial use of the Platform is permitted within the scope of these Terms.',
+  },
+  {
+    heading: 'Privacy & Data',
+    body: 'Your use of the Platform is also governed by our Privacy Policy, which is incorporated into these Terms by reference. By using the Platform, you agree to the collection and processing of your data as described in the Privacy Policy. youmii processes personal data in accordance with the EU General Data Protection Regulation (GDPR) and the Swiss Federal Act on Data Protection (nFADP).',
+  },
+  {
+    heading: 'Limitation of Liability',
+    body: 'To the fullest extent permitted by applicable law, youmii AG and its officers, employees, partners, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or in connection with your use of the Platform. Our total liability for any claim shall not exceed the amount you paid to us in the twelve months preceding the claim, or CHF 100, whichever is greater.',
+  },
+  {
+    heading: 'Indemnification',
+    body: 'You agree to indemnify and hold harmless youmii AG and its affiliates, officers, employees, and agents from any claims, losses, damages, liabilities, and expenses (including legal fees) arising from your use of the Platform, your violation of these Terms, or your infringement of any third-party rights.',
+  },
+  {
+    heading: 'Modifications to Terms',
+    body: 'youmii may update these Terms at any time. Material changes will be communicated via a notice on the Platform or by email to your registered address. Your continued use of the Platform after the effective date of the updated Terms constitutes your acceptance. We recommend reviewing the Terms periodically.',
+  },
+  {
+    heading: 'Governing Law',
+    body: 'These Terms are governed by and construed in accordance with the laws of Switzerland, without regard to its conflict-of-law provisions. Any disputes arising from these Terms or your use of the Platform shall be subject to the exclusive jurisdiction of the courts of Basel, Switzerland.',
+  },
+  {
+    heading: 'Contact Us',
+    body: 'If you have any questions about these Terms of Service, please contact us at: youmii AG, legal@youmii.app. Our team aims to respond to all enquiries within 5 business days. These Terms were last updated in June 2026 and apply to all users of youmii.app and associated youmii services.',
   },
 ]

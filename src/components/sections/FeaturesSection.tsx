@@ -10,7 +10,7 @@ export interface FeaturesSectionProps {
 
 export function FeaturesSection({ className = '' }: FeaturesSectionProps) {
   return (
-    <section className={`section${className ? ` ${className}` : ''}`}>
+    <section id="groupmatch" className={`section${className ? ` ${className}` : ''}`}>
       <div className="container flex flex-col items-center gap-4 sm:gap-6 lg:gap-10">
 
         {/* ── Heading ──────────────────────────────────────────────── */}

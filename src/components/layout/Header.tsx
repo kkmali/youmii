@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
+import { ArrowUpRight, X } from 'lucide-react'
 import { Button } from '../ui/Button'
 import chevronDown from '../../assets/icons/chevron-down.svg'
+import { socialLinks } from '../../utils/data'
 
 const navLinks = [
   { label: 'About', href: '/about' },
@@ -99,7 +101,7 @@ function LanguageSwitcher() {
 }
 
 /**
- * Animated hamburger ↔ X built entirely with Tailwind classes.
+ * Animated hamburger built entirely with Tailwind classes.
  */
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
@@ -125,7 +127,14 @@ function HamburgerIcon({ open }: { open: boolean }) {
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const isActive = (href: string) => {
     if (href.startsWith('#')) {
@@ -152,9 +161,9 @@ export function Header() {
   }, [mobileOpen])
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-header-bg">
+    <header className={`sticky top-0 z-50 w-full bg-header-bg transition-shadow duration-300 ${scrolled ? 'shadow-100' : 'shadow-none'}`}>
       {/* Top bar */}
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-2 md:py-3 flex items-center justify-between gap-4">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-3 flex items-center justify-between gap-4">
 
         {/* Logo */}
         <a href="/" className="flex shrink-0 h-8 lg:h-10">
@@ -209,62 +218,122 @@ export function Header() {
       <div className="md:hidden">
         {/* Backdrop */}
         <div
-          className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${
+          className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 ${
             mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
           aria-hidden="true"
           onClick={() => setMobileOpen(false)}
         />
 
-        {/* Drawer panel — slides in from the right */}
+        {/* Drawer panel */}
         <div
           id="mobile-menu"
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
           aria-hidden={!mobileOpen}
-          className={`fixed top-0 right-0 h-full w-70 bg-white z-50 flex flex-col shadow-foot transition-transform duration-300 ease-in-out ${
+          className={`fixed top-0 right-0 h-full w-[min(82vw,340px)] z-50 flex flex-col overflow-hidden transition-transform duration-300 ease-in-out ${
             mobileOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
+          style={{ background: 'linear-gradient(160deg,#fff9f5 0%,#fef3eb 40%,#fde8d4 100%)' }}
         >
-          {/* Drawer header */}
-          <div className="flex items-center justify-between px-5 py-4 border-b border-grey-border">
+          {/* Decorative blobs */}
+          <div className="pointer-events-none absolute -top-16 -right-16 w-52 h-52 rounded-full opacity-30" style={{ background: 'radial-gradient(circle,#ff934f 0%,transparent 70%)' }} aria-hidden="true" />
+          <div className="pointer-events-none absolute top-1/2 -left-20 w-48 h-48 rounded-full opacity-20" style={{ background: 'radial-gradient(circle,#ed5f18 0%,transparent 70%)' }} aria-hidden="true" />
+          <div className="pointer-events-none absolute bottom-24 right-0 w-36 h-36 rounded-full opacity-20" style={{ background: 'radial-gradient(circle,#f6ad79 0%,transparent 70%)' }} aria-hidden="true" />
+
+          {/* Header */}
+          <div className="relative flex items-center justify-between px-6 pt-6 pb-4">
             <a href="/" className="flex shrink-0 h-7" onClick={() => setMobileOpen(false)}>
               <img alt="Youmii" src="/youmii-logo.png" />
             </a>
             <button
-              className="p-2 rounded-lg hover:bg-card-bg focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 transition-colors"
+              className="size-9 flex items-center justify-center rounded-full bg-white border border-grey-border text-body-text hover:border-primary hover:text-primary active:scale-95 focus-visible:outline-2 focus-visible:outline-primary shadow-10 transition-all duration-200"
               onClick={() => setMobileOpen(false)}
               aria-label="Close menu"
             >
-              <HamburgerIcon open={true} />
+              <X size={15} strokeWidth={2.5} aria-hidden="true" />
             </button>
           </div>
 
+          {/* Eyebrow */}
+          <p className="relative px-6 pb-5 text-[11px] font-semibold tracking-widest uppercase text-primary/70">
+            Navigation
+          </p>
+
           {/* Nav links */}
-          <nav className="flex flex-col flex-1 px-5 pt-4" aria-label="Mobile navigation">
-            {navLinks.map((link) => {
+          <nav className="relative flex flex-col flex-1 px-4 gap-2" aria-label="Mobile navigation">
+            {navLinks.map((link, i) => {
               const active = isActive(link.href)
               return (
                 <a
                   key={link.label}
                   href={link.href}
-                  className={`py-3.5 text-base font-medium transition-colors border-b border-grey-border last:border-0 ${
-                    active ? 'text-primary font-semibold' : 'text-header-text hover:text-header-text-hover'
-                  } focus-visible:outline-2 focus-visible:outline-primary`}
+                  style={{ animationDelay: `${i * 70}ms` }}
+                  className={`group relative flex items-center gap-4 px-4 py-4 rounded-2xl transition-all duration-200 focus-visible:outline-2 focus-visible:outline-primary overflow-hidden ${
+                    mobileOpen ? 'animate-[fadeIn_0.4s_ease-out_both]' : 'opacity-0'
+                  } ${
+                    active
+                      ? 'bg-primary shadow-100 text-white'
+                      : 'bg-white/70 border border-white text-body-text hover:bg-white hover:border-brand-border hover:shadow-10'
+                  }`}
                   onClick={() => setMobileOpen(false)}
                 >
-                  {link.label}
+                  {/* Index number */}
+                  <span className={`text-[11px] font-bold tabular-nums shrink-0 w-5 ${active ? 'text-white/60' : 'text-primary/40 group-hover:text-primary/70'}`}>
+                    0{i + 1}
+                  </span>
+
+                  {/* Label */}
+                  <span className="flex-1 font-semibold text-base leading-none">
+                    {link.label}
+                  </span>
+
+                  {/* Arrow */}
+                  <ArrowUpRight
+                    size={16}
+                    strokeWidth={2}
+                    aria-hidden="true"
+                    className={`shrink-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${active ? 'opacity-70' : 'opacity-20 group-hover:opacity-60'}`}
+                  />
+
+                  {/* Active shine streak */}
+                  {active && (
+                    <span className="absolute right-0 top-0 h-full w-1/3 bg-white/10 rounded-r-2xl pointer-events-none" />
+                  )}
                 </a>
               )
             })}
           </nav>
 
-          {/* CTA */}
-          <div className="px-5 pb-8">
-            <Button variant="primary" className="w-full justify-center">
+
+          {/* Bottom */}
+          <div className="relative px-4 pt-4 pb-8 flex flex-col gap-4">
+            {/* Social */}
+            <div className="flex items-center justify-center gap-2.5">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="size-9 flex items-center justify-center rounded-full bg-white border border-grey-border hover:border-primary hover:shadow-100 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary shadow-10 transition-all duration-200"
+                >
+                  <img src={social.icon} alt="" width={15} height={15} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <Button variant="primary" fullWidth onClick={() => setMobileOpen(false)}>
               Download App
             </Button>
+
+            {/* Tagline */}
+            <p className="text-center text-[11px] text-secondary tracking-wide">
+              Available in Bern · Zurich · Basel
+            </p>
           </div>
         </div>
       </div>

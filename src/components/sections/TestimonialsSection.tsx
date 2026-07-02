@@ -149,9 +149,7 @@ export function TestimonialsSection({ className = '' }: TestimonialsSectionProps
           ))}
         </div>
 
-        <div className="container">
-          <StatsBar stats={statsData} />
-        </div>
+        <StatsBar stats={statsData} />
 
       </div>
     </section>
